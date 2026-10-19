@@ -1,0 +1,59 @@
+---
+// src/pages/projects/[slug].astro
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{project.title}</title>
+  </head>
+  <body class="bg-slate-950 text-slate-100 font-sans antialiased">
+    <main class="max-w-4xl mx-auto px-6 py-12">
+      
+      <a href="/" class="inline-flex items-center text-sm text-slate-400 hover:text-amber-400 mb-8">
+        &rarr; بازگشت به صفحه اصلی
+      </a>
+
+      <!-- هدر پروژه -->
+      <div class="border-b border-slate-800 pb-8">
+        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs px-3 py-1 rounded-full">
+          {project.category}
+        </span>
+        <h1 class="text-2xl md:text-4xl font-bold mt-4">{project.title}</h1>
+        
+        <div class="flex flex-wrap gap-6 mt-6 text-sm text-slate-400">
+          <div><strong class="text-slate-200">مقصد:</strong> {project.destination}</div>
+          <div><strong class="text-slate-200">تاریخ انجام:</strong> {project.date}</div>
+        </div>
+      </div>
+
+      <!-- عکس اصلی و توضیحات -->
+      <div class="py-8">
+        <img src={project.coverImage} alt={project.title} class="w-full h-80 object-cover rounded-2xl mb-8 border border-slate-800" />
+        
+        <h2 class="text-lg font-bold text-amber-400 mb-3">شرح فرآیند و جزئیات بار</h2>
+        <p class="text-slate-300 leading-8 text-justify">{project.details}</p>
+
+        <!-- گالری تصاویر -->
+        <h3 class="text-lg font-bold text-amber-400 mt-10 mb-4">تصاویر محموله و بارگیری</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {project.gallery.map((imgUrl) => (
+            <img src={imgUrl} alt="تصویر محموله" class="w-full h-56 object-cover rounded-xl border border-slate-800" />
+          ))}
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>
