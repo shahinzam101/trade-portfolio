@@ -1,7 +1,9 @@
 ---
 // src/pages/projects/[slug].astro
-import { projects } from '../../data/projects.js';
+import MainLayout from '../../layouts/MainLayout.astro';
+import { projects, companyInfo } from '../../data/projects.js';
 
+// ساخت صفحات استاتیک به ازای هر پروژه موجود در فایل دیتا
 export function getStaticPaths() {
   return projects.map((project) => ({
     params: { slug: project.slug },
@@ -12,48 +14,118 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 ---
 
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{project.title}</title>
-  </head>
-  <body class="bg-slate-950 text-slate-100 font-sans antialiased">
-    <main class="max-w-4xl mx-auto px-6 py-12">
-      
-      <a href="/" class="inline-flex items-center text-sm text-slate-400 hover:text-amber-400 mb-8">
-        &rarr; بازگشت به صفحه اصلی
-      </a>
+<MainLayout title={project.title}>
+  
+  <article class="max-w-5xl mx-auto px-6 py-12 animate-apple-in">
+    
+    <!-- دکمه بازگشت به صفحه اصلی -->
+    <a 
+      href="/" 
+      class="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-amber-400 transition-colors mb-8 bg-zinc-900/60 border border-white/[0.08] px-4 py-2 rounded-full"
+    >
+      <span>&rarr;</span>
+      <span>بازگشت به لیست پروژه‌ها</span>
+    </a>
 
-      <!-- هدر پروژه -->
-      <div class="border-b border-slate-800 pb-8">
-        <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs px-3 py-1 rounded-full">
+    <!-- هدر پروژه -->
+    <header class="mb-10">
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+        <span class="bg-amber-400 text-black text-xs font-bold px-3 py-1 rounded-full">
           {project.category}
         </span>
-        <h1 class="text-2xl md:text-4xl font-bold mt-4">{project.title}</h1>
-        
-        <div class="flex flex-wrap gap-6 mt-6 text-sm text-slate-400">
-          <div><strong class="text-slate-200">مقصد:</strong> {project.destination}</div>
-          <div><strong class="text-slate-200">تاریخ انجام:</strong> {project.date}</div>
-        </div>
+        <span class="text-zinc-400 text-sm">{project.date}</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+        {project.title}
+      </h1>
+    </header>
+
+    <!-- تصویر کاور بزرگ -->
+    <div class="rounded-3xl overflow-hidden border border-white/[0.1] bg-zinc-900 mb-12 shadow-2xl">
+      <img 
+        src={project.coverImage} 
+        alt={project.title} 
+        class="w-full max-h-[500px] object-cover"
+      />
+    </div>
+
+    <!-- جدول مشخصات فنی بار (Bento Grid به سبک اپل) -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+      <div class="bg-zinc-900/50 border border-white/[0.08] p-5 rounded-2xl">
+        <span class="text-xs text-zinc-400 block mb-1">مقصد صادرات</span>
+        <strong class="text-base sm:text-lg text-amber-400 font-bold">{project.clientLocation}</strong>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/[0.08] p-5 rounded-2xl">
+        <span class="text-xs text-zinc-400 block mb-1">حجم / تعداد محموله</span>
+        <strong class="text-base sm:text-lg text-white font-bold">{project.volume}</strong>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/[0.08] p-5 rounded-2xl">
+        <span class="text-xs text-zinc-400 block mb-1">نوع حمل و لجستیک</span>
+        <strong class="text-base sm:text-lg text-white font-bold">{project.transportType}</strong>
+      </div>
+      <div class="bg-zinc-900/50 border border-white/[0.08] p-5 rounded-2xl">
+        <span class="text-xs text-zinc-400 block mb-1">گمرک مبدأ</span>
+        <strong class="text-base sm:text-lg text-white font-bold">{project.customsOrigin}</strong>
+      </div>
+    </div>
+
+    <!-- بخش توضیحات کامل و اقدامات انجام شده -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
+      
+      <!-- ستون اصلی: شرح کامل پروژه -->
+      <div class="lg:col-span-2 bg-zinc-900/30 border border-white/[0.06] rounded-3xl p-8">
+        <h2 class="text-xl font-bold text-amber-400 mb-4">شرح کامل فرآیند اجرایی</h2>
+        <p class="text-zinc-300 leading-9 text-justify whitespace-pre-line">
+          {project.fullDescription}
+        </p>
       </div>
 
-      <!-- عکس اصلی و توضیحات -->
-      <div class="py-8">
-        <img src={project.coverImage} alt={project.title} class="w-full h-80 object-cover rounded-2xl mb-8 border border-slate-800" />
-        
-        <h2 class="text-lg font-bold text-amber-400 mb-3">شرح فرآیند و جزئیات بار</h2>
-        <p class="text-slate-300 leading-8 text-justify">{project.details}</p>
-
-        <!-- گالری تصاویر -->
-        <h3 class="text-lg font-bold text-amber-400 mt-10 mb-4">تصاویر محموله و بارگیری</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {project.gallery.map((imgUrl) => (
-            <img src={imgUrl} alt="تصویر محموله" class="w-full h-56 object-cover rounded-xl border border-slate-800" />
+      <!-- ستون کناری: نکات کلیدی و خدمات ارائه شده -->
+      <div class="bg-gradient-to-b from-amber-500/10 to-zinc-900/40 border border-amber-500/20 rounded-3xl p-8">
+        <h3 class="text-lg font-bold text-amber-400 mb-5">اقدامات کلیدی در این محموله</h3>
+        <ul class="space-y-4">
+          {project.challengesAndSolutions.map((item) => (
+            <li class="flex items-start gap-3 text-sm text-zinc-200 leading-relaxed">
+              <span class="text-amber-400 font-bold mt-1">✓</span>
+              <span>{item}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
-    </main>
-  </body>
-</html>
+    </div>
+
+    <!-- گالری تصاویر مستندات و بارگیری -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-6">گالری تصاویر محموله و بارگیری</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {project.gallery.map((imgUrl) => (
+          <div class="group overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-900 aspect-[4/3]">
+            <img 
+              src={imgUrl} 
+              alt={project.title} 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- باکس دعوت به همکاری در انتهای هر پروژه -->
+    <div class="mt-16 bg-zinc-900/80 border border-amber-400/30 rounded-3xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-xl font-bold text-white">نیاز به صادرات یا تأمین کالای مشابه دارید؟</h3>
+        <p class="text-sm text-zinc-400 mt-2">کارشناسان بازرگانی {companyInfo.name} آماده ارائه مشاوره تخصصی در امور گمرکی و لجستیک هستند.</p>
+      </div>
+      <a 
+        href={companyInfo.whatsapp} 
+        target="_blank"
+        class="shrink-0 bg-amber-400 hover:bg-amber-300 text-black font-bold px-7 py-3.5 rounded-full transition-all shadow-lg shadow-amber-500/20"
+      >
+        مشاوره در واتس‌اپ
+      </a>
+    </div>
+
+  </article>
+
+</MainLayout>

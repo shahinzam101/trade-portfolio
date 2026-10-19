@@ -1,0 +1,38 @@
+---
+// src/components/Navbar.astro
+import { companyInfo } from '../data/projects.js';
+---
+
+<!-- هدر چسبنده با افکت شیشه‌ای مات (Frosted Glass) دقیقاً به سبک macOS / Apple -->
+<nav class="sticky top-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/[0.08] transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    
+    <!-- لوگو و نام شرکت -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform duration-300">
+        آ
+      </div>
+      <div>
+        <span class="text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+          {companyInfo.name}
+        </span>
+        <span class="block text-[11px] text-zinc-400">بازرگانی و صادرات بین‌المللی</span>
+      </div>
+    </a>
+
+    <!-- لینک‌های دسترسی سریع و دکمه ارتباط -->
+    <div class="flex items-center gap-6">
+      <a href="/#projects" class="hidden sm:inline-block text-sm text-zinc-300 hover:text-amber-400 transition-colors">
+        سوابق صادراتی
+      </a>
+      <a 
+        href={companyInfo.whatsapp} 
+        target="_blank" 
+        class="bg-amber-400 hover:bg-amber-300 text-black text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] active:scale-95"
+      >
+        ارتباط مستقیم
+      </a>
+    </div>
+
+  </div>
+</nav>

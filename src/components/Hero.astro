@@ -1,0 +1,46 @@
+---
+// src/components/Hero.astro
+import { companyInfo } from '../data/projects.js';
+---
+
+<!-- بخش معرفی اصلی شرکت با تایپوگرافی درشت و مینیمال -->
+<section class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 border-b border-white/[0.06]">
+  
+  <div class="max-w-3xl animate-apple-in">
+    <!-- بج کوچک طلایی بالای تیتر -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-medium mb-6">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+      <span>تجارت بدون مرز با استانداردهای جهانی</span>
+    </div>
+
+    <!-- تیتر اصلی با ترکیب رنگ سفید و گرادینت طلایی -->
+    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.2] text-white">
+      {companyInfo.name}؛ <br />
+      <span class="text-transparent bg-clip-text bg-gradient-to-l from-amber-300 via-amber-400 to-amber-500">
+        {companyInfo.slogan}
+      </span>
+    </h1>
+
+    <!-- توضیحات شرکت -->
+    <p class="mt-6 text-base sm:text-lg text-zinc-400 leading-8 font-normal max-w-2xl">
+      {companyInfo.description}
+    </p>
+
+    <!-- آمار و ارقام کوتاه برای اعتباربخشی -->
+    <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/[0.08] max-w-lg">
+      <div>
+        <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400">+۱۰۰</span>
+        <span class="text-xs text-zinc-400 mt-1 block">محموله موفق صادراتی</span>
+      </div>
+      <div>
+        <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400">۵ کشور</span>
+        <span class="text-xs text-zinc-400 mt-1 block">مقصد فعال تجاری</span>
+      </div>
+      <div>
+        <span class="block text-2xl sm:text-3xl font-extrabold text-amber-400">۱۰۰٪</span>
+        <span class="text-xs text-zinc-400 mt-1 block">تضمین سلامت بار</span>
+      </div>
+    </div>
+  </div>
+
+</section>
