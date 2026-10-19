@@ -1,5 +1,5 @@
 /* src/styles/global.css */
-
+@import "tailwindcss";
 /* اعمال فونت وزیرمتن به کل بدنه سایت و تنظیم رنگ پس‌زمینه مشکی عمیق اپل */
 body {
   font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
