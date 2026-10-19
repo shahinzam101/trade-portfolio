@@ -2,10 +2,10 @@
 // src/layouts/MainLayout.astro
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
+import WhatsAppCTA from '../components/WhatsAppCTA.astro';
 import Footer from '../components/Footer.astro';
 import { companyInfo } from '../data/projects.js';
 
-// دریافت عنوان صفحه به عنوان ورودی (Prop)
 const { title = companyInfo.name } = Astro.props;
 ---
 
@@ -16,7 +16,7 @@ const { title = companyInfo.name } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} | {companyInfo.name}</title>
     
-    <!-- بارگذاری فونت وزیرمتن از گوگل فونت با وزن‌های مختلف -->
+    <!-- فونت وزیرمتن -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -24,19 +24,34 @@ const { title = companyInfo.name } = Astro.props;
   
   <body class="min-h-screen flex flex-col bg-[#050505] text-zinc-100 selection:bg-amber-400 selection:text-black">
     
-    <!-- افکت نوری زرد/طلایی بسیار ملایم در بالای سایت (سبک مدرن اپل) -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-amber-500/10 blur-[130px] pointer-events-none -z-10"></div>
+    <!-- افکت نوری بالای صفحه -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[320px] sm:w-[650px] h-[250px] bg-amber-500/10 blur-[130px] pointer-events-none -z-10"></div>
 
-    <!-- نوبار شیشه‌ای بالای صفحه -->
     <Navbar />
 
-    <!-- محتوای متغیر هر صفحه اینجا قرار می‌گیرد -->
     <main class="flex-grow">
       <slot />
     </main>
 
-    <!-- فوتر سایت -->
+    <!-- بخش تماس واتس‌اپ و دکمه شناور -->
+    <WhatsAppCTA />
+
     <Footer />
+
+    <!-- اسکریپت فوق‌سبک برای فعال کردن انیمیشن اسکرول روی تمام المان‌های دارای کلاس reveal -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      });
+    </script>
 
   </body>
 </html>

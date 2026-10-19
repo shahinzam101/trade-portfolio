@@ -1,6 +1,6 @@
 /* src/styles/global.css */
 @import "tailwindcss";
-/* اعمال فونت وزیرمتن به کل بدنه سایت و تنظیم رنگ پس‌زمینه مشکی عمیق اپل */
+
 body {
   font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #050505;
@@ -9,7 +9,13 @@ body {
   scroll-behavior: smooth;
 }
 
-/* استایل اسکرول‌بار مینیمال تیره */
+/* شبکه نقطه‌ای بسیار ظریف در پس‌زمینه برای خروج از سادگی مطلق */
+.bg-apple-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* اسکرول‌بار مینیمال تیره */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -21,26 +27,24 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b; /* زرد/طلایی هنگام هاور */
+  background: #fbbf24;
 }
 
-/* انیمیشن ورود نرم به سبک صفحات اپل (Apple Spring/Cubic-Bezier) */
-@keyframes appleFadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(24px) scale(0.98);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* سیستم انیمیشن اسکرول به سبک اپل (Scroll Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px) scale(0.97);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-.animate-apple-in {
-  animation: appleFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
-/* تاخیرهای زمانی برای لود ترتیبی المان‌ها */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
+/* تاخیر برای باز شدن ترتیبی کارت‌ها */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }

@@ -8,27 +8,27 @@ import { projects } from '../data/projects.js';
 
 <MainLayout title="پورتفولیو و سوابق صادراتی">
   
-  <!-- ۱. بخش معرفی بالای صفحه -->
   <Hero />
 
-  <!-- ۲. بخش گرید پروژه‌ها -->
-  <section id="projects" class="max-w-6xl mx-auto px-6 py-20">
+  <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
     
-    <!-- تیتر بخش پروژه‌ها -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 animate-apple-in delay-100">
+    <!-- تیتر بخش پروژه‌ها با انیمیشن اسکرول -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 reveal">
       <div>
-        <span class="text-amber-400 text-xs font-bold tracking-wider uppercase">پرونده‌های اجرایی</span>
+        <span class="text-amber-400 text-xs font-bold tracking-wider">پرونده‌های اجرایی</span>
         <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2">محموله‌ها و پروژه‌های انجام شده</h2>
       </div>
-      <p class="text-sm text-zinc-400 mt-2 sm:mt-0">
+      <p class="text-xs sm:text-sm text-zinc-400 mt-2 sm:mt-0">
         برای مشاهده تصاویر بارگیری و جزئیات گمرکی روی هر پروژه کلیک کنید.
       </p>
     </div>
 
-    <!-- شبکه کارت‌ها (Grid) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-apple-in delay-200">
-      {projects.map((project) => (
-        <ProjectCard project={project} />
+    <!-- گرید کارت‌ها با ظاهر شدن ترتیبی هنگام اسکرول -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {projects.map((project, index) => (
+        <div class={`reveal delay-${(index % 3) * 100}`}>
+          <ProjectCard project={project} />
+        </div>
       ))}
     </div>
 
