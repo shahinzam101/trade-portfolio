@@ -1,50 +1,93 @@
 /* src/styles/global.css */
 @import "tailwindcss";
 
-body {
-  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #050505;
-  color: #f5f5f7;
-  overflow-x: hidden;
+:root {
+  --color-background: #0B0B0C;
+  --color-surface: #121214;
+  --color-surface-elevated: #18181B;
+
+  --color-text-primary: #F4F4F5;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
+
+  --color-border: #27272A;
+  --color-border-strong: #3F3F46;
+
+  --color-accent: #D6A52A;
+  --color-accent-hover: #E0B23A;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* شبکه نقطه‌ای بسیار ظریف در پس‌زمینه برای خروج از سادگی مطلق */
-.bg-apple-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  line-height: 1.75;
+  margin: 0;
 }
 
-/* اسکرول‌بار مینیمال تیره */
+/* کانتینر استاندارد و یکپارچه در کل صفحات (حداکثر 1160 پیکسل) */
+.container-editorial {
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-editorial {
+    padding-inline: 2rem;
+  }
+}
+
+/* حالت Focus واضح و استاندارد برای ناوبری با صفحه‌کلید */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* اسکرول‌بار خنثی و مینیمال */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #fbbf24;
+  background: var(--color-border-strong);
+  border-radius: 3px;
 }
 
-/* سیستم انیمیشن اسکرول به سبک اپل (Scroll Reveal) */
-.reveal {
-  opacity: 0;
-  transform: translateY(36px) scale(0.97);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+/* انتقال‌های کنترل‌شده و سریع (180ms) */
+.transition-editorial {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 200ms ease;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+/* رعایت تنظیمات کاهش حرکت سیستم‌عامل کاربر */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-/* تاخیر برای باز شدن ترتیبی کارت‌ها */
-.delay-100 { transition-delay: 100ms; }
-.delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }

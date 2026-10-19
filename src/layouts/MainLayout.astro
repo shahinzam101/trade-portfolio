@@ -6,52 +6,56 @@ import WhatsAppCTA from '../components/WhatsAppCTA.astro';
 import Footer from '../components/Footer.astro';
 import { companyInfo } from '../data/projects.js';
 
-const { title = companyInfo.name } = Astro.props;
+const {
+  title = companyInfo.name,
+  description = companyInfo.description,
+  hideBottomCTA = false
+} = Astro.props;
+
+const pageTitle = title === companyInfo.name ? `${companyInfo.name} | بازرگانی و صادرات بین‌المللی` : `${title} | ${companyInfo.name}`;
 ---
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" class="dark">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | {companyInfo.name}</title>
-    
-    <!-- فونت وزیرمتن -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:site_name" content={companyInfo.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+
+    <!-- فونت وزیرمتن (وزن‌های مورد نیاز برای جلوگیری از بارگذاری اضافی) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  
-  <body class="min-h-screen flex flex-col bg-[#050505] text-zinc-100 selection:bg-amber-400 selection:text-black">
-    
-    <!-- افکت نوری بالای صفحه -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[320px] sm:w-[650px] h-[250px] bg-amber-500/10 blur-[130px] pointer-events-none -z-10"></div>
+
+  <body class="min-h-screen flex flex-col bg-[#0B0B0C] text-[#F4F4F5] selection:bg-[#D6A52A] selection:text-[#0B0B0C]">
+    <!-- لینک دسترس‌پذیری برای پرش مستقیم به محتوای اصلی با صفحه‌کلید -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[100] focus:bg-[#D6A52A] focus:text-[#0B0B0C] focus:px-4 focus:py-2 focus:rounded-[10px] focus:font-semibold focus:text-sm"
+    >
+      پرش به محتوای اصلی
+    </a>
 
     <Navbar />
 
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow">
       <slot />
     </main>
 
-    <!-- بخش تماس واتس‌اپ و دکمه شناور -->
-    <WhatsAppCTA />
+    <WhatsAppCTA hideSection={hideBottomCTA} />
 
     <Footer />
-
-    <!-- اسکریپت فوق‌سبک برای فعال کردن انیمیشن اسکرول روی تمام المان‌های دارای کلاس reveal -->
-    <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('active');
-            }
-          });
-        }, { threshold: 0.12 });
-
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-      });
-    </script>
-
   </body>
 </html>

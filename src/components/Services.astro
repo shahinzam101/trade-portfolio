@@ -1,0 +1,42 @@
+---
+// src/components/Services.astro
+import { services } from '../data/projects.js';
+---
+
+<section id="services" class="py-20 sm:py-24 border-b border-[#27272A]">
+  <div class="container-editorial">
+    
+    <!-- سرتیتر بخش خدمات -->
+    <div class="max-w-2xl mb-12">
+      <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+        خدمات بازرگانی
+      </p>
+      <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+        حوزه‌های تخصصی و اجرایی شرکت
+      </h2>
+      <p class="text-[15px] text-[#A1A1AA] mt-3 leading-relaxed">
+        فرآیند صادرات نیازمند هماهنگی دقیق میان تولیدکننده، گمرک و ناوگان حمل‌ونقل است. خدمات ما زنجیره عملیات تجاری را به‌صورت یکپارچه پوشش می‌دهد.
+      </p>
+    </div>
+
+    <!-- ساختار جدولی/خطی تمیز برای خدمات -->
+    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-r border-[#27272A] rounded-[14px] overflow-hidden bg-[#121214]">
+      {services.map((service, index) => (
+        <div class="p-6 sm:p-8 border-b border-l border-[#27272A] flex flex-col justify-between">
+          <div>
+            <span class="text-[12px] font-medium text-[#71717A] block mb-3">
+              ۰{index + 1}
+            </span>
+            <h3 class="text-[18px] font-bold text-[#F4F4F5]">
+              {service.title}
+            </h3>
+            <p class="text-[14px] sm:text-[15px] text-[#A1A1AA] mt-3 leading-[1.8]">
+              {service.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

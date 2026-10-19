@@ -2,36 +2,72 @@
 // src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects.js';
+import { projects, companyInfo } from '../data/projects.js';
 ---
 
-<MainLayout title="پورتفولیو و سوابق صادراتی">
+<MainLayout title={companyInfo.name}>
   
+  <!-- ۱. بخش معرفی اصلی و مسیرهای تجاری -->
   <Hero />
 
-  <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-    
-    <!-- تیتر بخش پروژه‌ها با انیمیشن اسکرول -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 reveal">
-      <div>
-        <span class="text-amber-400 text-xs font-bold tracking-wider">پرونده‌های اجرایی</span>
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2">محموله‌ها و پروژه‌های انجام شده</h2>
-      </div>
-      <p class="text-xs sm:text-sm text-zinc-400 mt-2 sm:mt-0">
-        برای مشاهده تصاویر بارگیری و جزئیات گمرکی روی هر پروژه کلیک کنید.
-      </p>
-    </div>
+  <!-- ۲. بخش خدمات شرکت -->
+  <Services />
 
-    <!-- گرید کارت‌ها با ظاهر شدن ترتیبی هنگام اسکرول -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-      {projects.map((project, index) => (
-        <div class={`reveal delay-${(index % 3) * 100}`}>
-          <ProjectCard project={project} />
+  <!-- ۳. بخش محموله‌ها و پروژه‌های انجام‌شده -->
+  <section id="projects" class="py-20 sm:py-24 border-b border-[#27272A]">
+    <div class="container-editorial">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+            سوابق اجرایی
+          </p>
+          <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+            محموله‌ها و پروژه‌های انجام‌شده
+          </h2>
         </div>
-      ))}
-    </div>
+        <p class="text-[14px] text-[#A1A1AA] max-w-md">
+          گزیده‌ای از عملیات‌های تأمین، تشریفات گمرکی و ارسال محموله‌های صادراتی به کشورهای همسایه.
+        </p>
+      </div>
 
+      <!-- گرید سه ستونه استاندارد در دسکتاپ، دو ستونه در تبلت و تک‌ستونه در موبایل -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ۴. بخش درباره ما و رویکرد اجرایی -->
+  <section id="about" class="py-20 sm:py-24">
+    <div class="container-editorial">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        
+        <div class="lg:col-span-5">
+          <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+            درباره {companyInfo.name}
+          </p>
+          <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+            رویکرد ما در مدیریت ریسک و لجستیک صادراتی
+          </h2>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5 text-[15px] sm:text-[16px] text-[#A1A1AA] leading-[1.9]">
+          <p>
+            در تجارت برون‌مرزی، هماهنگی میان آماده‌سازی کالا در کارخانه، بسته‌بندی متناسب با شیوه حمل و دقت در تنظیم اسناد گمرکی، نقش تعیین‌کننده‌ای در تحویل به‌موقع محموله دارد.
+          </p>
+          <p>
+            شرکت بازرگانی <strong class="text-[#F4F4F5] font-semibold">{companyInfo.name}</strong> با تمرکز بر مرزهای تجاری غرب و شمال‌غرب کشور، فرآیندهای اجرایی را به‌گونه‌ای مدیریت می‌کند که خریدار و تولیدکننده بدون درگیری با پیچیدگی‌های اداری و ترانزیتی، تجارت خود را پیش ببرند.
+          </p>
+        </div>
+
+      </div>
+    </div>
   </section>
 
 </MainLayout>

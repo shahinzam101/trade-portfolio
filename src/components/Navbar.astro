@@ -1,38 +1,140 @@
 ---
 // src/components/Navbar.astro
 import { companyInfo } from '../data/projects.js';
+
+const navLinks = [
+  { label: "صفحه اصلی", href: "/" },
+  { label: "خدمات", href: "/#services" },
+  { label: "پروژه‌ها", href: "/#projects" },
+  { label: "درباره ما", href: "/#about" },
+  { label: "تماس با ما", href: "#contact" }
+];
 ---
 
-<!-- هدر چسبنده با افکت شیشه‌ای مات (Frosted Glass) دقیقاً به سبک macOS / Apple -->
-<nav class="sticky top-0 z-50 backdrop-blur-xl bg-black/70 border-b border-white/[0.08] transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+<header class="sticky top-0 z-40 bg-[#0B0B0C]/95 backdrop-blur-sm border-b border-[#27272A]">
+  <div class="container-editorial h-[76px] flex items-center justify-between gap-4">
     
-    <!-- لوگو و نام شرکت -->
-    <a href="/" class="flex items-center gap-3 group">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform duration-300">
+    <!-- نشان برند و نام شرکت -->
+    <a href="/" class="flex items-center gap-3 group focus:outline-none">
+      <div class="w-9 h-9 rounded-[10px] bg-[#18181B] border border-[#3F3F46] flex items-center justify-center text-[#D6A52A] font-bold text-base transition-editorial group-hover:border-[#D6A52A]">
         آ
       </div>
-      <div>
-        <span class="text-lg font-bold tracking-tight text-white group-hover:text-amber-400 transition-colors">
+      <div class="flex flex-col">
+        <span class="text-[16px] font-bold text-[#F4F4F5] leading-snug">
           {companyInfo.name}
         </span>
-        <span class="block text-[11px] text-zinc-400">بازرگانی و صادرات بین‌المللی</span>
+        <span class="text-[11px] text-[#71717A] leading-none mt-0.5">
+          بازرگانی و صادرات بین‌المللی
+        </span>
       </div>
     </a>
 
-    <!-- لینک‌های دسترسی سریع و دکمه ارتباط -->
-    <div class="flex items-center gap-6">
-      <a href="/#projects" class="hidden sm:inline-block text-sm text-zinc-300 hover:text-amber-400 transition-colors">
-        سوابق صادراتی
-      </a>
-      <a 
-        href={companyInfo.whatsapp} 
-        target="_blank" 
-        class="bg-amber-400 hover:bg-amber-300 text-black text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(251,191,36,0.4)] active:scale-95"
+    <!-- لینک‌های ناوبری دسکتاپ -->
+    <nav aria-label="ناوبری اصلی" class="hidden md:flex items-center gap-7">
+      {navLinks.map((item) => (
+        <a
+          href={item.href}
+          class="text-[14px] font-medium text-[#A1A1AA] hover:text-[#F4F4F5] transition-editorial py-1"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- دکمه اقدام اصلی دسکتاپ و دکمه منوی موبایل -->
+    <div class="flex items-center gap-3">
+      <a
+        href={companyInfo.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center justify-center bg-[#D6A52A] hover:bg-[#E0B23A] text-[#0B0B0C] text-[13px] font-semibold px-4 py-2.5 rounded-[10px] transition-editorial"
       >
-        ارتباط مستقیم
+        درخواست مشاوره
       </a>
+
+      <!-- دکمه باز و بسته کردن منوی موبایل -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+        aria-label="باز کردن منوی ناوبری"
+        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-[10px] bg-[#121214] border border-[#27272A] text-[#F4F4F5] hover:border-[#3F3F46] transition-editorial"
+      >
+        <!-- آیکون همبرگر -->
+        <svg id="icon-menu-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <!-- آیکون بستن -->
+        <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
 
   </div>
-</nav>
+
+  <!-- منوی بازشونده موبایل -->
+  <nav
+    id="mobile-navigation"
+    aria-label="منوی موبایل"
+    class="hidden md:hidden border-t border-[#27272A] bg-[#121214]"
+  >
+    <div class="container-editorial py-5 flex flex-col gap-1">
+      {navLinks.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-nav-link text-[15px] font-medium text-[#F4F4F5] hover:text-[#D6A52A] py-3 border-b border-[#27272A]/60 last:border-b-0 transition-editorial"
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="pt-4 mt-2">
+        <a
+          href={companyInfo.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full inline-flex items-center justify-center bg-[#D6A52A] hover:bg-[#E0B23A] text-[#0B0B0C] text-[14px] font-semibold px-4 py-3 rounded-[10px] transition-editorial"
+        >
+          درخواست مشاوره در واتس‌اپ
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  (() => {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-navigation');
+    const iconOpen = document.getElementById('icon-menu-open');
+    const iconClose = document.getElementById('icon-menu-close');
+    const links = document.querySelectorAll('.mobile-nav-link');
+
+    if (!toggleBtn || !mobileNav) return;
+
+    const setMenuState = (isOpen) => {
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      toggleBtn.setAttribute('aria-label', isOpen ? 'بستن منوی ناوبری' : 'باز کردن منوی ناوبری');
+      mobileNav.classList.toggle('hidden', !isOpen);
+      iconOpen?.classList.toggle('hidden', isOpen);
+      iconClose?.classList.toggle('hidden', !isOpen);
+    };
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyOpen = toggleBtn.getAttribute('aria-expanded') === 'true';
+      setMenuState(!currentlyOpen);
+    });
+
+    links.forEach((link) => {
+      link.addEventListener('click', () => setMenuState(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
+        setMenuState(false);
+        toggleBtn.focus();
+      }
+    });
+  })();
+</script>

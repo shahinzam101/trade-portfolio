@@ -1,15 +1,77 @@
 ---
 // src/components/Footer.astro
-import { companyInfo } from '../data/projects.js';
+import { companyInfo, services } from '../data/projects.js';
 ---
 
-<footer class="border-t border-white/[0.08] bg-black/40 mt-20">
-  <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-zinc-500">
-    <div>
-      <span class="font-bold text-zinc-200">{companyInfo.name}</span> — تمامی حقوق محفوظ است.
+<footer class="border-t border-[#27272A] bg-[#0B0B0C] pt-14 pb-20 sm:pb-14 text-[14px]">
+  <div class="container-editorial">
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#27272A]">
+      
+      <!-- معرفی شرکت (5 ستون) -->
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-[8px] bg-[#18181B] border border-[#3F3F46] flex items-center justify-center text-[#D6A52A] font-bold text-sm">
+            آ
+          </div>
+          <span class="text-[16px] font-bold text-[#F4F4F5]">{companyInfo.name}</span>
+        </div>
+        <p class="text-[#A1A1AA] text-[13px] leading-[1.85] max-w-sm">
+          {companyInfo.shortIntro}
+        </p>
+        <p class="text-[#71717A] text-[12px] mt-4">
+          {companyInfo.location}
+        </p>
+      </div>
+
+      <!-- دسترسی سریع (3 ستون) -->
+      <div class="md:col-span-3">
+        <h3 class="text-[13px] font-bold text-[#F4F4F5] mb-4">دسترسی سریع</h3>
+        <ul class="space-y-2.5 text-[13px] text-[#A1A1AA]">
+          <li><a href="/" class="hover:text-[#F4F4F5] transition-editorial">صفحه اصلی</a></li>
+          <li><a href="/#services" class="hover:text-[#F4F4F5] transition-editorial">خدمات بازرگانی</a></li>
+          <li><a href="/#projects" class="hover:text-[#F4F4F5] transition-editorial">پروژه‌های انجام‌شده</a></li>
+          <li><a href="/#about" class="hover:text-[#F4F4F5] transition-editorial">درباره شرکت</a></li>
+        </ul>
+      </div>
+
+      <!-- راه‌های ارتباطی (4 ستون) -->
+      <div class="md:col-span-4">
+        <h3 class="text-[13px] font-bold text-[#F4F4F5] mb-4">اطلاعات تماس</h3>
+        <ul class="space-y-2.5 text-[13px] text-[#A1A1AA]">
+          <li>
+            <span class="text-[#71717A]">تلفن: </span>
+            <a href={companyInfo.phoneHref} class="text-[#F4F4F5] hover:text-[#D6A52A] transition-editorial">
+              {companyInfo.phoneDisplay}
+            </a>
+          </li>
+          <li>
+            <span class="text-[#71717A]">واتس‌اپ بازرگانی: </span>
+            <a
+              href={companyInfo.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[#F4F4F5] hover:text-[#D6A52A] transition-editorial"
+            >
+              ارسال پیام مستقیم &larr;
+            </a>
+          </li>
+          <li>
+            <span class="text-[#71717A]">پست الکترونیک: </span>
+            <a href={`mailto:${companyInfo.email}`} class="text-[#F4F4F5] hover:text-[#D6A52A] transition-editorial">
+              {companyInfo.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
-    <div class="flex gap-6 text-zinc-400">
-      <span>{companyInfo.location}</span>
+
+    <!-- کپی‌رایت -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#71717A]">
+      <p>© ۱۴۰۵ {companyInfo.legalTitle}. تمامی حقوق محفوظ است.</p>
+      <p>طراحی و توسعه بر پایه استانداردهای تجارت بین‌الملل</p>
     </div>
+
   </div>
 </footer>
