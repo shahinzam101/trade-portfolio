@@ -1,22 +1,50 @@
 ---
-// src/components/LanguagePicker.astro
-const currentPath = Astro.url.pathname;
+import { projects } from '../data/projects.js';
 
-// تشخیص زبان فعلی از آدرس (اگر با /fa شروع شود فارسی است، در غیر این صورت ترکی است)
-const isPersian = currentPath.startsWith('/fa');
-const targetUrl = isPersian 
-  ? currentPath.replace(/^\/fa/, '') || '/' 
-  : `/fa${currentPath === '/' ? '' : currentPath}`;
+const pathname = Astro.url.pathname;
+const isPersian = pathname === '/fa' || pathname.startsWith('/fa/');
+const currentLang: 'fa' | 'tr' = isPersian ? 'fa' : 'tr';
+const targetLang: 'fa' | 'tr' = isPersian ? 'tr' : 'fa';
+
+let targetUrl = isPersian ? '/' : '/fa';
+
+const projectPrefix = isPersian ? '/fa/projects/' : '/projects/';
+
+if (pathname.startsWith(projectPrefix)) {
+  const slug = pathname
+    .slice(projectPrefix.length)
+    .replace(/\/$/, '');
+
+  const currentProject = projects[currentLang].find(
+    (project) => project.slug === slug
+  );
+
+  if (currentProject) {
+    const translatedProject = projects[targetLang].find(
+      (project) =>
+        project.translationKey === currentProject.translationKey
+    );
+
+    if (translatedProject) {
+      targetUrl =
+        targetLang === 'fa'
+          ? `/fa/projects/${translatedProject.slug}`
+          : `/projects/${translatedProject.slug}`;
+    }
+  }
+} else if (pathname !== '/' && pathname !== '/fa') {
+  targetUrl = isPersian
+    ? pathname.replace(/^\/fa(?=\/|$)/, '') || '/'
+    : `/fa${pathname}`;
+}
 ---
 
 <a
   href={targetUrl}
-  class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[12px] font-bold rounded-[8px] bg-brand-surface border border-brand-border-strong text-brand-secondary hover:text-brand-gold hover:border-brand-gold transition-colors focus:outline-none"
-  title={isPersian ? "Türkçe'ye Geç" : "تغییر زبان به فارسی"}
-  aria-label="تغییر زبان"
+  lang={targetLang}
+  title={isPersian ? "Türkçe'ye Geç" : 'تغییر زبان به فارسی'}
+  aria-label={isPersian ? "Türkçe'ye Geç" : 'تغییر زبان به فارسی'}
+  class="inline-flex items-center justify-center"
 >
-  <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-  </svg>
-  <span class="mt-0.5 tracking-wider">{isPersian ? 'TR' : 'FA'}</span>
+  <span>{targetLang.toUpperCase()}</span>
 </a>

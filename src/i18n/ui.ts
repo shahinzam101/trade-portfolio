@@ -4,7 +4,7 @@ export const languages = {
   tr: { label: 'Türkçe', dir: 'ltr' },
 };
 
-export const defaultLang = 'fa';
+export const defaultLang = 'tr';
 
 export const ui = {
   fa: {

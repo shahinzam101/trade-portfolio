@@ -15,7 +15,10 @@ export function getStaticPaths() {
   });
 }
 
-const { project, lang = ((Astro.currentLocale || 'tr') as 'fa' | 'tr') } = Astro.props;
+const { project } = Astro.props;
+
+// تشخیص زبان از روی آدرس صفحه (اگر با /fa شروع شود، فارسی است)
+const lang = (Astro.url.pathname.startsWith('/fa') ? 'fa' : 'tr') as 'fa' | 'tr';
 
 const projectList = (projects[lang] || projects.tr) as any[];
 const otherProjects = projectList.filter((item: any) => item.slug !== project.slug).slice(0, 2);
@@ -75,6 +78,7 @@ const specifications = [
 
 const homeHref = lang === 'fa' ? '/fa' : '/';
 const projectsHref = lang === 'fa' ? '/fa#projects' : '/#projects';
+const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
 ---
 
 <MainLayout title={project.title} description={project.summary}>
@@ -229,7 +233,7 @@ const projectsHref = lang === 'fa' ? '/fa#projects' : '/#projects';
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {otherProjects.map((other: any) => (
             <a
-              href={`/projects/${other.slug}`}
+              href={`${projectBaseUrl}/${other.slug}`}
               class="group block surface-card surface-card-interactive p-5"
             >
               <div class="flex items-center justify-between text-[12px] text-brand-muted mb-2">

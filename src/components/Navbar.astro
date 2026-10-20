@@ -3,7 +3,12 @@
 import { companyInfo } from '../data/projects.js';
 import LanguagePicker from './LanguagePicker.astro';
 
-const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
+const lang: 'fa' | 'tr' =
+  Astro.url.pathname === '/fa' ||
+  Astro.url.pathname.startsWith('/fa/')
+    ? 'fa'
+    : 'tr';
+
 const info = companyInfo[lang];
 
 const ui = {
