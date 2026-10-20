@@ -3,14 +3,13 @@
 const { project } = Astro.props;
 ---
 
-<article class="group flex flex-col bg-[#121214] border border-[#27272A] hover:border-[#3F3F46] rounded-[14px] overflow-hidden transition-editorial h-full">
+<article class="group surface-card surface-card-interactive flex flex-col overflow-hidden h-full">
   
-  <!-- تصویر پروژه با نسبت ابعاد ثابت 16:10 -->
   <a
     href={`/projects/${project.slug}`}
     tabindex="-1"
     aria-hidden="true"
-    class="block aspect-[16/10] w-full overflow-hidden bg-[#18181B] border-b border-[#27272A]"
+    class="block aspect-[16/10] w-full overflow-hidden bg-brand-elevated border-b border-brand-border"
   >
     <img
       src={project.coverImage}
@@ -21,38 +20,33 @@ const { project } = Astro.props;
     />
   </a>
 
-  <!-- محتوای کارت -->
   <div class="p-6 flex flex-col flex-grow justify-between">
     <div>
-      <!-- دسته‌بندی و مقصد -->
-      <div class="flex items-center justify-between gap-2 text-[12px] text-[#A1A1AA] mb-2.5">
+      <div class="flex items-center justify-between gap-2 text-[12px] text-brand-secondary mb-2.5">
         <span>{project.category}</span>
-        <span class="text-[#71717A]">•</span>
+        <span class="text-brand-muted">•</span>
         <span>مقصد: {project.clientLocation}</span>
       </div>
 
-      <!-- عنوان کارت -->
-      <h3 class="text-[18px] font-bold text-[#F4F4F5] leading-snug">
+      <h3 class="text-[18px] font-bold text-brand-text leading-snug">
         <a
           href={`/projects/${project.slug}`}
-          class="hover:text-[#D6A52A] transition-editorial focus:outline-none"
+          class="hover:text-brand-secondary transition-colors focus:outline-none"
         >
           {project.title}
         </a>
       </h3>
 
-      <!-- توضیح کوتاه -->
-      <p class="mt-3 text-[14px] text-[#A1A1AA] line-clamp-2 leading-[1.75]">
+      <p class="mt-3 text-[14px] text-brand-secondary line-clamp-2 leading-[1.75]">
         {project.summary}
       </p>
     </div>
 
-    <!-- لینک مشاهده جزئیات -->
-    <div class="mt-6 pt-4 border-t border-[#27272A] flex items-center justify-between">
-      <span class="text-[12px] text-[#71717A]">{project.date}</span>
+    <div class="mt-6 pt-4 border-t border-brand-border flex items-center justify-between">
+      <span class="text-[12px] text-brand-muted">{project.date}</span>
       <a
         href={`/projects/${project.slug}`}
-        class="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#F4F4F5] group-hover:text-[#D6A52A] transition-editorial"
+        class="inline-flex items-center gap-1.5 text-[13px] font-medium text-brand-secondary group-hover:text-brand-text transition-colors"
       >
         <span>جزئیات پروژه</span>
         <span aria-hidden="true" class="transition-transform duration-150 group-hover:-translate-x-1">&larr;</span>

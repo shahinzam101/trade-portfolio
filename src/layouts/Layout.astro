@@ -22,10 +22,11 @@ const { title = companyInfo.name } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   
-  <body class="min-h-screen flex flex-col bg-[#050505] text-zinc-100 selection:bg-amber-400 selection:text-black">
-    
+  
+<body class="min-h-screen flex flex-col selection:bg-[var(--color-accent)] selection:text-[var(--color-accent-foreground)]">
+  
     <!-- افکت نوری زرد/طلایی بسیار ملایم در بالای سایت (سبک مدرن اپل) -->
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-amber-500/10 blur-[130px] pointer-events-none -z-10"></div>
+    <!-- <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-amber-500/10 blur-[130px] pointer-events-none -z-10"></div> -->
 
     <!-- نوبار شیشه‌ای بالای صفحه -->
     <Navbar />

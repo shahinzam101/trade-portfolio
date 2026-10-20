@@ -3,34 +3,32 @@
 import { services } from '../data/projects.js';
 ---
 
-<section id="services" class="py-20 sm:py-24 border-b border-[#27272A]">
+<section id="services" class="py-20 sm:py-24 border-b border-brand-border bg-brand-surface">
   <div class="container-editorial">
     
-    <!-- سرتیتر بخش خدمات -->
     <div class="max-w-2xl mb-12">
-      <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+      <p class="text-[12.5px] font-medium text-brand-muted mb-2">
         خدمات بازرگانی
       </p>
-      <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+      <h2 class="text-[26px] sm:text-[32px] font-bold text-brand-text leading-snug">
         حوزه‌های تخصصی و اجرایی شرکت
       </h2>
-      <p class="text-[15px] text-[#A1A1AA] mt-3 leading-relaxed">
+      <p class="text-[15px] text-brand-secondary mt-3 leading-relaxed">
         فرآیند صادرات نیازمند هماهنگی دقیق میان تولیدکننده، گمرک و ناوگان حمل‌ونقل است. خدمات ما زنجیره عملیات تجاری را به‌صورت یکپارچه پوشش می‌دهد.
       </p>
     </div>
 
-    <!-- ساختار جدولی/خطی تمیز برای خدمات -->
-    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-r border-[#27272A] rounded-[14px] overflow-hidden bg-[#121214]">
+    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-r border-brand-border rounded-[12px] overflow-hidden bg-brand-bg">
       {services.map((service, index) => (
-        <div class="p-6 sm:p-8 border-b border-l border-[#27272A] flex flex-col justify-between">
+        <div class="p-6 sm:p-8 border-b border-l border-brand-border flex flex-col justify-between transition-colors hover:bg-brand-surface/40">
           <div>
-            <span class="text-[12px] font-medium text-[#71717A] block mb-3">
+            <span class="text-[12px] font-medium text-brand-muted block mb-2.5">
               ۰{index + 1}
             </span>
-            <h3 class="text-[18px] font-bold text-[#F4F4F5]">
+            <h3 class="text-[18px] font-bold text-brand-text">
               {service.title}
             </h3>
-            <p class="text-[14px] sm:text-[15px] text-[#A1A1AA] mt-3 leading-[1.8]">
+            <p class="text-[14px] sm:text-[15px] text-brand-secondary mt-3 leading-[1.8]">
               {service.description}
             </p>
           </div>

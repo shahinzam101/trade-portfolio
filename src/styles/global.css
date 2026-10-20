@@ -2,19 +2,33 @@
 @import "tailwindcss";
 
 :root {
-  --color-background: #0B0B0C;
-  --color-surface: #121214;
-  --color-surface-elevated: #18181B;
+  --color-background: #112622;
+  --color-surface: #183630;
+  --color-surface-elevated: #1F453D;
 
-  --color-text-primary: #F4F4F5;
-  --color-text-secondary: #A1A1AA;
-  --color-text-muted: #71717A;
+  --color-text-primary: #E3DAC9;
+  --color-text-secondary: #D0C7B6;
+  --color-text-muted: #B8B2A6;
 
-  --color-border: #27272A;
-  --color-border-strong: #3F3F46;
+  --color-border: #29574D;
+  --color-border-strong: #37685C;
 
-  --color-accent: #D6A52A;
-  --color-accent-hover: #E0B23A;
+  --color-accent: #bb9e6c;
+  --color-accent-hover: #D8B77F;
+  --color-accent-foreground: #112622;
+}
+
+@theme {
+  --color-brand-bg: #112622;
+  --color-brand-surface: #183630;
+  --color-brand-elevated: #1F453D;
+  --color-brand-text: #E3DAC9;
+  --color-brand-secondary: #D0C7B6;
+  --color-brand-muted: #B8B2A6;
+  --color-brand-border: #29574D;
+  --color-brand-border-strong: #37685C;
+  --color-brand-gold: #E5C690;
+  --color-brand-gold-hover: #D8B77F;
 }
 
 *,
@@ -40,7 +54,6 @@ body {
   margin: 0;
 }
 
-/* کانتینر استاندارد و یکپارچه در کل صفحات (حداکثر 1160 پیکسل) */
 .container-editorial {
   width: 100%;
   max-width: 1160px;
@@ -54,13 +67,108 @@ body {
   }
 }
 
-/* حالت Focus واضح و استاندارد برای ناوبری با صفحه‌کلید */
+.surface-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.surface-card-interactive:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* CTA اصلی (استفاده در Hero و بخش تماس) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  transition: background-color 180ms ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* دکمه ظریف‌تر مخصوص Navbar (بدون استفاده از !important) */
+.btn-primary-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 180ms ease;
+}
+
+.btn-primary-sm:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-strong);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.375rem;
+  border-radius: 10px;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--color-surface-elevated);
+  border-color: var(--color-text-secondary);
+}
+
+/* لینک‌های ناوبری با رنگ ثانویه و خط زیرین کرم در حالت Hover */
+.nav-link {
+  position: relative;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding-block: 0.25rem;
+  transition: color 180ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-text-primary);
+  transition: width 180ms ease;
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
-/* اسکرول‌بار خنثی و مینیمال */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -72,12 +180,6 @@ body {
   border-radius: 3px;
 }
 
-/* انتقال‌های کنترل‌شده و سریع (180ms) */
-.transition-editorial {
-  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 200ms ease;
-}
-
-/* رعایت تنظیمات کاهش حرکت سیستم‌عامل کاربر */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

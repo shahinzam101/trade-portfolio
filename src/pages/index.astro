@@ -9,31 +9,27 @@ import { projects, companyInfo } from '../data/projects.js';
 
 <MainLayout title={companyInfo.name}>
   
-  <!-- ۱. بخش معرفی اصلی و مسیرهای تجاری -->
   <Hero />
 
-  <!-- ۲. بخش خدمات شرکت -->
   <Services />
 
-  <!-- ۳. بخش محموله‌ها و پروژه‌های انجام‌شده -->
-  <section id="projects" class="py-20 sm:py-24 border-b border-[#27272A]">
+  <section id="projects" class="py-20 sm:py-24 border-b border-brand-border bg-brand-bg">
     <div class="container-editorial">
       
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
         <div>
-          <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+          <p class="text-[12.5px] font-medium text-brand-muted mb-2">
             سوابق اجرایی
           </p>
-          <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+          <h2 class="text-[26px] sm:text-[32px] font-bold text-brand-text leading-snug">
             محموله‌ها و پروژه‌های انجام‌شده
           </h2>
         </div>
-        <p class="text-[14px] text-[#A1A1AA] max-w-md">
+        <p class="text-[14px] text-brand-secondary max-w-md">
           گزیده‌ای از عملیات‌های تأمین، تشریفات گمرکی و ارسال محموله‌های صادراتی به کشورهای همسایه.
         </p>
       </div>
 
-      <!-- گرید سه ستونه استاندارد در دسکتاپ، دو ستونه در تبلت و تک‌ستونه در موبایل -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <ProjectCard project={project} />
@@ -43,26 +39,25 @@ import { projects, companyInfo } from '../data/projects.js';
     </div>
   </section>
 
-  <!-- ۴. بخش درباره ما و رویکرد اجرایی -->
-  <section id="about" class="py-20 sm:py-24">
+  <section id="about" class="py-20 sm:py-24 bg-brand-surface border-b border-brand-border">
     <div class="container-editorial">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
         <div class="lg:col-span-5">
-          <p class="text-[13px] font-medium text-[#D6A52A] mb-2">
+          <p class="text-[12.5px] font-medium text-brand-muted mb-2">
             درباره {companyInfo.name}
           </p>
-          <h2 class="text-[26px] sm:text-[32px] font-bold text-[#F4F4F5] leading-snug">
+          <h2 class="text-[26px] sm:text-[32px] font-bold text-brand-text leading-snug">
             رویکرد ما در مدیریت ریسک و لجستیک صادراتی
           </h2>
         </div>
 
-        <div class="lg:col-span-7 space-y-5 text-[15px] sm:text-[16px] text-[#A1A1AA] leading-[1.9]">
+        <div class="lg:col-span-7 space-y-5 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.9]">
           <p>
             در تجارت برون‌مرزی، هماهنگی میان آماده‌سازی کالا در کارخانه، بسته‌بندی متناسب با شیوه حمل و دقت در تنظیم اسناد گمرکی، نقش تعیین‌کننده‌ای در تحویل به‌موقع محموله دارد.
           </p>
           <p>
-            شرکت بازرگانی <strong class="text-[#F4F4F5] font-semibold">{companyInfo.name}</strong> با تمرکز بر مرزهای تجاری غرب و شمال‌غرب کشور، فرآیندهای اجرایی را به‌گونه‌ای مدیریت می‌کند که خریدار و تولیدکننده بدون درگیری با پیچیدگی‌های اداری و ترانزیتی، تجارت خود را پیش ببرند.
+            شرکت بازرگانی <strong class="text-brand-text font-semibold">{companyInfo.name}</strong> با تمرکز بر مرزهای تجاری غرب و شمال‌غرب کشور، فرآیندهای اجرایی را به‌گونه‌ای مدیریت می‌کند که خریدار و تولیدکننده بدون درگیری با پیچیدگی‌های اداری و ترانزیتی، تجارت خود را پیش ببرند.
           </p>
         </div>
 

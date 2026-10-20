@@ -1,7 +1,7 @@
 ---
 // src/pages/projects/[slug].astro
 import MainLayout from '../../layouts/MainLayout.astro';
-import { projects, companyInfo } from '../../data/projects.js';
+import { projects } from '../../data/projects.js';
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -12,10 +12,8 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 
-// یافتن پروژه‌های دیگر برای لینک در انتهای صفحه
 const otherProjects = projects.filter((item) => item.slug !== project.slug).slice(0, 2);
 
-// مشخصات فنی پروژه (فقط مواردی که مقدار معتبر دارند نمایش داده می‌شوند)
 const specifications = [
   { label: "مقصد صادرات", value: project.clientLocation },
   { label: "نوع محصول", value: project.productType },
@@ -29,42 +27,42 @@ const specifications = [
 
 <MainLayout title={project.title} description={project.summary}>
   
-  <article class="py-12 sm:py-16">
+  <article class="py-12 sm:py-16 bg-brand-bg">
     <div class="container-editorial">
       
-      <!-- ۱. Breadcrumb (مسیر راهنما) -->
-      <nav aria-label="مسیر صفحه" class="mb-8 text-[13px] text-[#71717A]">
+      <!-- Breadcrumb -->
+      <nav aria-label="مسیر صفحه" class="mb-8 text-[13px] text-brand-muted">
         <ol class="flex flex-wrap items-center gap-2">
           <li>
-            <a href="/" class="hover:text-[#F4F4F5] transition-editorial">صفحه اصلی</a>
+            <a href="/" class="hover:text-brand-text transition-colors">صفحه اصلی</a>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <a href="/#projects" class="hover:text-[#F4F4F5] transition-editorial">پروژه‌ها</a>
+            <a href="/#projects" class="hover:text-brand-text transition-colors">پروژه‌ها</a>
           </li>
           <li aria-hidden="true">/</li>
-          <li class="text-[#A1A1AA] truncate max-w-[260px] sm:max-w-none" aria-current="page">
+          <li class="text-brand-secondary truncate max-w-[260px] sm:max-w-none" aria-current="page">
             {project.title}
           </li>
         </ol>
       </nav>
 
-      <!-- ۲ تا ۴. دسته‌بندی، عنوان اصلی و خلاصه پروژه -->
+      <!-- هدر پروژه -->
       <header class="max-w-3xl mb-10">
-        <p class="text-[13px] font-medium text-[#D6A52A] mb-2.5">
+        <p class="text-[13px] font-medium text-brand-gold mb-2.5">
           {project.category}
         </p>
-        <h1 class="text-[28px] sm:text-[38px] lg:text-[42px] font-bold text-[#F4F4F5] leading-[1.3]">
+        <h1 class="text-[28px] sm:text-[38px] lg:text-[42px] font-bold text-brand-text leading-[1.3]">
           {project.title}
         </h1>
-        <p class="mt-4 text-[16px] sm:text-[17px] text-[#A1A1AA] leading-[1.8]">
+        <p class="mt-4 text-[16px] sm:text-[17px] text-brand-secondary leading-[1.8]">
           {project.summary}
         </p>
       </header>
 
-      <!-- ۵. تصویر اصلی پروژه -->
+      <!-- تصویر اصلی -->
       <figure class="mb-12">
-        <div class="rounded-[14px] overflow-hidden border border-[#27272A] bg-[#121214] aspect-[16/9] max-h-[520px]">
+        <div class="rounded-[12px] overflow-hidden border border-brand-border bg-brand-surface aspect-[16/9] max-h-[520px]">
           <img
             src={project.coverImage}
             alt={project.coverAlt || project.title}
@@ -73,30 +71,29 @@ const specifications = [
         </div>
       </figure>
 
-      <!-- ۶. مشخصات کلیدی پروژه (ساختار جدولی تمیز بدون کارت‌های رنگی) -->
-      <section aria-label="مشخصات کلیدی محموله" class="mb-14 bg-[#121214] border border-[#27272A] rounded-[14px] p-6 sm:p-8">
-        <h2 class="text-[16px] font-bold text-[#F4F4F5] pb-4 mb-6 border-b border-[#27272A]">
+      <!-- مشخصات کلیدی محموله -->
+      <section aria-label="مشخصات کلیدی محموله" class="mb-14 surface-card p-6 sm:p-8">
+        <h2 class="text-[16px] font-bold text-brand-text pb-4 mb-6 border-b border-brand-border">
           مشخصات کلیدی محموله
         </h2>
         <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-8">
           {specifications.map((spec) => (
-            <div class="border-b border-[#27272A]/60 pb-4 sm:border-b-0 sm:pb-0">
-              <dt class="text-[12px] text-[#71717A]">{spec.label}</dt>
-              <dd class="text-[15px] font-semibold text-[#F4F4F5] mt-1">{spec.value}</dd>
+            <div class="border-b border-brand-border/60 pb-4 sm:border-b-0 sm:pb-0">
+              <dt class="text-[12px] text-brand-muted">{spec.label}</dt>
+              <dd class="text-[15px] font-semibold text-brand-text mt-1">{spec.value}</dd>
             </div>
           ))}
         </dl>
       </section>
 
-      <!-- ۷ و ۸. شرح عملیات اجرایی و اقدامات کلیدی شرکت -->
+      <!-- شرح فرآیند و مراحل اجرایی -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 items-start">
         
-        <!-- شرح عملیات اجرایی (7 ستون) -->
         <section class="lg:col-span-7">
-          <h2 class="text-[22px] font-bold text-[#F4F4F5] mb-5">
+          <h2 class="text-[22px] font-bold text-brand-text mb-5">
             شرح فرآیند و عملیات اجرایی
           </h2>
-          <div class="space-y-4 text-[15px] sm:text-[16px] text-[#A1A1AA] leading-[1.9] text-justify">
+          <div class="space-y-4 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.9] text-justify">
             {Array.isArray(project.fullDescription) ? (
               project.fullDescription.map((paragraph) => <p>{paragraph}</p>)
             ) : (
@@ -104,29 +101,27 @@ const specifications = [
             )}
           </div>
 
-          <!-- ۱۰. نتیجه مستند پروژه -->
           {project.documentedOutcome && (
-            <div class="mt-8 pt-6 border-t border-[#27272A]">
-              <h3 class="text-[15px] font-bold text-[#F4F4F5] mb-2">
+            <div class="mt-8 pt-6 border-t border-brand-border">
+              <h3 class="text-[15px] font-bold text-brand-text mb-2">
                 نتیجه عملیات
               </h3>
-              <p class="text-[14px] sm:text-[15px] text-[#A1A1AA] leading-relaxed">
+              <p class="text-[14px] sm:text-[15px] text-brand-secondary leading-relaxed">
                 {project.documentedOutcome}
               </p>
             </div>
           )}
         </section>
 
-        <!-- مراحل و اقدامات کلیدی (5 ستون) -->
         {project.operationalSteps && project.operationalSteps.length > 0 && (
-          <aside class="lg:col-span-5 bg-[#121214] border border-[#27272A] rounded-[14px] p-6 sm:p-7">
-            <h2 class="text-[17px] font-bold text-[#F4F4F5] pb-4 mb-5 border-b border-[#27272A]">
+          <aside class="lg:col-span-5 surface-card p-6 sm:p-7">
+            <h2 class="text-[17px] font-bold text-brand-text pb-4 mb-5 border-b border-brand-border">
               مراحل اجرایی انجام‌شده
             </h2>
             <ol class="space-y-4">
               {project.operationalSteps.map((step, index) => (
-                <li class="flex items-start gap-3.5 text-[14px] text-[#A1A1AA] leading-[1.75]">
-                  <span class="w-6 h-6 rounded-[6px] bg-[#18181B] border border-[#3F3F46] text-[#F4F4F5] text-[12px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
+                <li class="flex items-start gap-3.5 text-[14px] text-brand-secondary leading-[1.75]">
+                  <span class="w-6 h-6 rounded-[6px] bg-brand-elevated border border-brand-border-strong text-brand-text text-[12px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
                     {index + 1}
                   </span>
                   <span>{step}</span>
@@ -138,10 +133,10 @@ const specifications = [
 
       </div>
 
-      <!-- ۹. تصاویر تکمیلی (در صورت وجود) -->
+      <!-- تصاویر تکمیلی -->
       {project.gallery && project.gallery.length > 0 && (
-        <section class="mb-16 pt-10 border-t border-[#27272A]">
-          <h2 class="text-[20px] font-bold text-[#F4F4F5] mb-6">
+        <section class="mb-16 pt-10 border-t border-brand-border">
+          <h2 class="text-[20px] font-bold text-brand-text mb-6">
             تصاویر تکمیلی فرآیند آماده‌سازی و حمل
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -149,7 +144,7 @@ const specifications = [
               const imgUrl = typeof item === 'string' ? item : item.url;
               const imgAlt = typeof item === 'string' ? project.title : item.alt;
               return (
-                <figure class="rounded-[12px] overflow-hidden border border-[#27272A] bg-[#121214] aspect-[16/10]">
+                <figure class="rounded-[12px] overflow-hidden border border-brand-border bg-brand-surface aspect-[16/10]">
                   <img
                     src={imgUrl}
                     alt={imgAlt}
@@ -164,15 +159,15 @@ const specifications = [
         </section>
       )}
 
-      <!-- ۱۱. لینک بازگشت و سایر پروژه‌ها -->
-      <section class="pt-10 border-t border-[#27272A]">
+      <!-- سایر پروژه‌ها -->
+      <section class="pt-10 border-t border-brand-border">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <h2 class="text-[18px] font-bold text-[#F4F4F5]">
+          <h2 class="text-[18px] font-bold text-brand-text">
             سایر پروژه‌های صادراتی
           </h2>
           <a
             href="/#projects"
-            class="inline-flex items-center gap-2 text-[13px] font-medium text-[#A1A1AA] hover:text-[#F4F4F5] transition-editorial"
+            class="inline-flex items-center gap-2 text-[13px] font-medium text-brand-secondary hover:text-brand-text transition-colors"
           >
             <span>&rarr;</span>
             <span>بازگشت به فهرست تمام پروژه‌ها</span>
@@ -183,13 +178,13 @@ const specifications = [
           {otherProjects.map((other) => (
             <a
               href={`/projects/${other.slug}`}
-              class="group block bg-[#121214] border border-[#27272A] hover:border-[#3F3F46] rounded-[12px] p-5 transition-editorial"
+              class="group block surface-card surface-card-interactive p-5"
             >
-              <div class="flex items-center justify-between text-[12px] text-[#71717A] mb-2">
+              <div class="flex items-center justify-between text-[12px] text-brand-muted mb-2">
                 <span>{other.category}</span>
                 <span>مقصد: {other.clientLocation}</span>
               </div>
-              <h3 class="text-[16px] font-bold text-[#F4F4F5] group-hover:text-[#D6A52A] transition-editorial">
+              <h3 class="text-[16px] font-bold text-brand-text group-hover:text-brand-gold transition-colors">
                 {other.title}
               </h3>
             </a>

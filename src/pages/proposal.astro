@@ -1,0 +1,190 @@
+---
+// src/pages/proposal.astro
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <title>پروپوزال طراحی وب‌سایت — آیگون تجارت غرب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+          width: 210mm;
+          height: 297mm;
+          overflow: hidden;
+          background-color: #0B0B0C !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-[#0B0B0C] text-[#F4F4F5] antialiased">
+    
+    <!-- کانتینر استاندارد صفحه A4 -->
+    <div class="w-full max-w-[820px] mx-auto min-h-screen p-7 sm:p-8 flex flex-col justify-between box-border">
+      
+      <div>
+        <!-- ۱. هدر پروپوزال -->
+        <header class="flex items-center justify-between pb-3.5 border-b border-[#27272A]">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-[8px] bg-[#18181B] border border-[#D6A52A] flex items-center justify-center text-[#D6A52A] font-bold text-base">
+              آ
+            </div>
+            <div>
+                <h1 class="text-[17px] font-bold text-[#F4F4F5] leading-none">پروپوزال طراحی و توسعه پورتال تجاری</h1>
+                <p class="text-[11px] text-[#A1A1AA] mt-1">شرکت بازرگانی بین‌المللی آیگون تجارت غرب</p>
+            </div>
+          </div>
+          <div class="text-left text-[11px] text-[#71717A] leading-tight">
+            <div>تاریخ: ۱۴۰۵/۰۷/۲۸</div>
+            <div class="mt-1 text-[#D6A52A] font-semibold">پیش‌نمایش آنلاین</div>
+          </div>
+        </header>
+
+        <!-- ۲. باکس پیش‌نمایش آنلاین -->
+        <div class="mt-3.5 bg-[#121214] border border-[#27272A] rounded-[10px] px-4 py-2.5 flex items-center justify-between gap-4">
+          <div>
+            <span class="text-[11px] font-semibold text-[#D6A52A] block">نسخه اولیه آنلاین و آماده بررسی</span>
+            <p class="text-[11.5px] text-[#A1A1AA] mt-0.5">
+              اسکلت اولیه وب‌سایت با معماری ابری پرسرعت و بدون هزینه سالانه سرور بارگذاری شده است:
+            </p>
+          </div>
+          <a
+            href="https://trade-portfolio-3pv.pages.dev"
+            target="_blank"
+            class="shrink-0 bg-[#18181B] border border-[#3F3F46] hover:border-[#D6A52A] text-[#F4F4F5] text-[11px] font-semibold px-3 py-1.5 rounded-[6px] transition-colors"
+          >
+            مشاهده دمو &larr;
+          </a>
+        </div>
+
+        <!-- ۳. مقایسه دو پکیج در دو ستون هم‌عرض کنار هم -->
+        <div class="mt-4 grid grid-cols-2 gap-4 items-stretch">
+          
+          <!-- پکیج پایه (ستون راست) -->
+          <div class="bg-[#121214] border border-[#27272A] rounded-[12px] p-4.5 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-semibold text-[#71717A] tracking-wider uppercase block">پکیج استاندارد</span>
+              <h2 class="text-[15.5px] font-bold text-[#F4F4F5] mt-0.5">پورتفولیو پایه</h2>
+              <p class="text-[11px] text-[#A1A1AA] mt-1 leading-relaxed">
+                مناسب جهت معرفی کلی خدمات و سوابق اجرایی در وب
+              </p>
+
+              <div class="my-3 pb-3 border-b border-[#27272A] flex items-baseline gap-1">
+                <span class="text-[21px] font-extrabold text-[#F4F4F5]">۱۰,۰۰۰,۰۰۰</span>
+                <span class="text-[11px] text-[#A1A1AA]">تومان</span>
+              </div>
+
+              <ul class="space-y-2 text-[11px] text-[#A1A1AA]">
+                <li class="flex items-start gap-2">
+                  <span class="text-[#71717A]">•</span>
+                  <span>طراحی اختصاصی واکنش‌گرا (موبایل و دسکتاپ)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#71717A]">•</span>
+                  <span>پیاده‌سازی به صورت <strong class="text-[#F4F4F5]">تک‌زبانه</strong> (زبان انتخابی)</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#71717A]">•</span>
+                  <span>معرفی خدمات و صفحات مجزای هر محموله صادراتی</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#71717A]">•</span>
+                  <span>اتصال مستقیم به واتس‌اپ بازرگانی</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#71717A]">•</span>
+                  <span>میزبانی ابری پرسرعت بدون هزینه سالانه سرور</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-3.5 pt-2.5 border-t border-[#27272A] text-[10.5px] text-[#71717A]">
+              مدت‌زمان تحویل نهایی: ۳ روز کاری
+            </div>
+          </div>
+
+          <!-- پکیج VIP (ستون چپ) -->
+          <div class="bg-[#151518] border border-[#D6A52A] rounded-[12px] p-4.5 flex flex-col justify-between">
+            <div>
+              <!-- هدر کارت VIP به همراه بج ۳ خطی دقیقاً مشابه فیگما در سمت چپ -->
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <span class="text-[10px] font-semibold text-[#D6A52A] tracking-wider uppercase block">پکیج جامع صادراتی</span>
+                  <h2 class="text-[15.5px] font-bold text-[#F4F4F5] mt-0.5">پورتال بین‌المللی + کاتالوگ</h2>
+                  <p class="text-[11px] text-[#A1A1AA] mt-1 leading-relaxed">
+                    جلب اعتماد طرف‌های خارجی و پرزنتیشن رسمی
+                  </p>
+                </div>
+
+                <!-- بج ۳ خطی وسط‌چین به سبک فیگما (بدون Glow و کاملاً مینیمال) -->
+                <div class="shrink-0 flex flex-col items-center justify-center bg-[#1A1A1E] border border-[#D6A52A]/50 px-2.5 py-1 rounded-[7px] text-center">
+                  <span class="text-[9.5px] font-extrabold text-[#D6A52A] leading-tight">پیشنهاد ویژه</span>
+                  <span class="text-[8px] font-medium text-[#71717A] leading-tight my-0.5">جهت</span>
+                  <span class="text-[9px] font-bold text-[#F4F4F5] leading-tight">بازارهای بین‌المللی</span>
+                </div>
+              </div>
+
+              <div class="my-3 pb-3 border-b border-[#27272A] flex items-baseline justify-between">
+                <div class="flex items-baseline gap-1">
+                  <span class="text-[21px] font-extrabold text-[#D6A52A]">۱۹,۵۰۰,۰۰۰</span>
+                  <span class="text-[11px] text-[#F4F4F5]">تومان</span>
+                </div>
+                <span class="text-[10px] text-[#A1A1AA]">همراه با کاتالوگ PDF</span>
+              </div>
+
+              <ul class="space-y-2 text-[11px] text-[#F4F4F5]">
+                <li class="flex items-start gap-2">
+                  <span class="text-[#D6A52A] font-bold">✓</span>
+                  <span><strong>تمامی امکانات پکیج پایه</strong> با کیفیت پرمیوم</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#D6A52A] font-bold">✓</span>
+                  <span><strong>پورتال چندزبانه:</strong> مذاکره به زبان خریدار و تأمین‌کننده خارجی</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#D6A52A] font-bold">✓</span>
+                  <span><strong>کاتالوگ رسمی (Company Profile PDF):</strong> رزومه گرافیکی اختصاصی</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#D6A52A] font-bold">✓</span>
+                  <span><strong>نقشه کریدورهای صادراتی:</strong> نمایش بصری مرزها و مقاصد فعال</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-[#D6A52A] font-bold">✓</span>
+                  <span><strong>تایم‌لاین عملیات و ویترین اسناد:</strong> شفافیت و اثبات سوابق اجرایی</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-3.5 pt-2.5 border-t border-[#27272A] flex items-center justify-between text-[10.5px]">
+              <span class="text-[#A1A1AA]">مدت‌زمان تحویل: ۷ الی ۱۰ روز کاری</span>
+              <span class="text-[#D6A52A] font-semibold">بیشترین بازدهی تجاری</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ۴. فوتر پروپوزال -->
+      <footer class="pt-3.5 border-t border-[#27272A] flex items-center justify-between text-[11px] text-[#A1A1AA]">
+        <div>
+          <strong class="text-[#F4F4F5]">شرایط پرداخت:</strong> ۴۰٪ پیش‌پرداخت هنگام تایید، ۶۰٪ پس از تحویل نهایی و اتصال به دامنه رسمی.
+        </div>
+        <div class="text-[#71717A]">
+          طراحی و توسعه اختصاصی
+        </div>
+      </footer>
+
+    </div>
+
+  </body>
+</html>

@@ -11,61 +11,55 @@ const navLinks = [
 ];
 ---
 
-<header class="sticky top-0 z-40 bg-[#0B0B0C]/95 backdrop-blur-sm border-b border-[#27272A]">
-  <div class="container-editorial h-[76px] flex items-center justify-between gap-4">
+<header class="sticky top-0 z-40 bg-brand-bg border-b border-brand-border">
+  <div class="container-editorial h-[72px] flex items-center justify-between gap-6">
     
     <!-- نشان برند و نام شرکت -->
     <a href="/" class="flex items-center gap-3 group focus:outline-none">
-      <div class="w-9 h-9 rounded-[10px] bg-[#18181B] border border-[#3F3F46] flex items-center justify-center text-[#D6A52A] font-bold text-base transition-editorial group-hover:border-[#D6A52A]">
+      <div class="w-[34px] h-[34px] rounded-[8px] bg-brand-surface border border-brand-border-strong flex items-center justify-center text-brand-text font-bold text-[15px] transition-colors group-hover:border-brand-secondary">
         آ
       </div>
       <div class="flex flex-col">
-        <span class="text-[16px] font-bold text-[#F4F4F5] leading-snug">
+        <span class="text-[15.5px] font-bold text-brand-text leading-tight">
           {companyInfo.name}
         </span>
-        <span class="text-[11px] text-[#71717A] leading-none mt-0.5">
+        <span class="text-[11px] text-brand-muted leading-none mt-1">
           بازرگانی و صادرات بین‌المللی
         </span>
       </div>
     </a>
 
     <!-- لینک‌های ناوبری دسکتاپ -->
-    <nav aria-label="ناوبری اصلی" class="hidden md:flex items-center gap-7">
+    <nav aria-label="ناوبری اصلی" class="hidden md:flex items-center gap-8">
       {navLinks.map((item) => (
-        <a
-          href={item.href}
-          class="text-[14px] font-medium text-[#A1A1AA] hover:text-[#F4F4F5] transition-editorial py-1"
-        >
+        <a href={item.href} class="nav-link">
           {item.label}
         </a>
       ))}
     </nav>
 
-    <!-- دکمه اقدام اصلی دسکتاپ و دکمه منوی موبایل -->
+    <!-- دکمه مشاوره ظریف‌تر و دکمه منوی موبایل -->
     <div class="flex items-center gap-3">
       <a
         href={companyInfo.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center justify-center bg-[#D6A52A] hover:bg-[#E0B23A] text-[#0B0B0C] text-[13px] font-semibold px-4 py-2.5 rounded-[10px] transition-editorial"
+        class="hidden sm:inline-flex btn-primary-sm"
       >
         درخواست مشاوره
       </a>
 
-      <!-- دکمه باز و بسته کردن منوی موبایل -->
       <button
         id="mobile-menu-toggle"
         type="button"
         aria-expanded="false"
         aria-controls="mobile-navigation"
         aria-label="باز کردن منوی ناوبری"
-        class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-[10px] bg-[#121214] border border-[#27272A] text-[#F4F4F5] hover:border-[#3F3F46] transition-editorial"
+        class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[8px] bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border-strong transition-colors"
       >
-        <!-- آیکون همبرگر -->
         <svg id="icon-menu-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
         </svg>
-        <!-- آیکون بستن -->
         <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -78,23 +72,23 @@ const navLinks = [
   <nav
     id="mobile-navigation"
     aria-label="منوی موبایل"
-    class="hidden md:hidden border-t border-[#27272A] bg-[#121214]"
+    class="hidden md:hidden border-t border-brand-border bg-brand-surface"
   >
-    <div class="container-editorial py-5 flex flex-col gap-1">
+    <div class="container-editorial py-4 flex flex-col gap-1">
       {navLinks.map((item) => (
         <a
           href={item.href}
-          class="mobile-nav-link text-[15px] font-medium text-[#F4F4F5] hover:text-[#D6A52A] py-3 border-b border-[#27272A]/60 last:border-b-0 transition-editorial"
+          class="mobile-nav-link text-[14.5px] font-medium text-brand-secondary hover:text-brand-text py-2.5 border-b border-brand-border/60 last:border-b-0 transition-colors"
         >
           {item.label}
         </a>
       ))}
-      <div class="pt-4 mt-2">
+      <div class="pt-3 mt-1">
         <a
           href={companyInfo.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full inline-flex items-center justify-center bg-[#D6A52A] hover:bg-[#E0B23A] text-[#0B0B0C] text-[14px] font-semibold px-4 py-3 rounded-[10px] transition-editorial"
+          class="w-full btn-primary"
         >
           درخواست مشاوره در واتس‌اپ
         </a>
