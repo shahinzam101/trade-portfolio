@@ -31,30 +31,31 @@ const ui = {
 const t = ui[lang];
 ---
 
-<section class="bg-brand-bg border-b border-brand-border py-14 sm:py-20 lg:py-24">
+<section class="bg-brand-bg border-b border-brand-border py-10 sm:py-18 lg:py-24">
   <div class="container-editorial">
     
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
       
       <div class="lg:col-span-7">
-        <p class="text-[13px] font-medium text-brand-gold tracking-wide mb-3">
+        <p class="text-[12px] sm:text-[13px] font-medium text-brand-gold tracking-wide mb-2.5 sm:mb-3">
           {info.legalTitle}
         </p>
 
-        <h1 class="text-[27px] sm:text-[36px] lg:text-[42px] font-bold text-brand-text leading-[1.35] tracking-tight text-balance">
+        <h1 class="text-[24px] sm:text-[36px] lg:text-[42px] font-bold text-brand-text leading-[1.35] tracking-tight text-balance">
           {info.tagline}
         </h1>
 
-        <p class="mt-5 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.85] max-w-2xl">
+        <p class="mt-4 sm:mt-5 text-[14.5px] sm:text-[16px] text-brand-secondary leading-[1.8] sm:leading-[1.85] max-w-2xl">
           {info.description}
         </p>
 
-        <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
+        <!-- دکمه‌ها: در موبایل تمام‌عرض برای لمس راحت، در دسکتاپ کنار هم -->
+        <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+          <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary w-full sm:w-auto">
             {t.btnConsult}
           </a>
 
-          <a href="#projects" class="btn-outline group flex items-center gap-2">
+          <a href="#projects" class="btn-outline group w-full sm:w-auto flex items-center justify-center gap-2">
             <span>{t.btnProjects}</span>
             <span aria-hidden="true" class={`transition-transform duration-150 ${lang === 'fa' ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}>
               {lang === 'fa' ? '←' : '→'}
@@ -62,36 +63,42 @@ const t = ui[lang];
           </a>
         </div>
 
-        <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-border">
+        <!-- شاخص‌های عملیاتی: بهینه برای موبایل -->
+        <dl class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-6 mt-9 sm:mt-12 pt-7 sm:pt-8 border-t border-brand-border">
           {info.operationalHighlights.map((item) => (
-            <div class={`sm:border-brand-border/60 ${lang === 'fa' ? 'sm:border-r sm:pr-4' : 'sm:border-l sm:pl-4'} first:border-0 first:p-0`}>
-              <dt class="text-[12px] text-brand-muted">{item.label}</dt>
-              <dd class="text-[15px] font-bold text-brand-text mt-1">{item.value}</dd>
-              <p class="text-[12px] text-brand-secondary mt-0.5">{item.note}</p>
+            <div class={`bg-brand-surface/50 sm:bg-transparent p-3.5 sm:p-0 rounded-[10px] sm:rounded-none border border-brand-border/60 sm:border-0 ${lang === 'fa' ? 'sm:border-r sm:pr-4' : 'sm:border-l sm:pl-4'} first:border-0 first:sm:p-0`}>
+              <div class="flex sm:block items-baseline justify-between gap-2">
+                <dt class="text-[11.5px] sm:text-[12px] text-brand-muted">{item.label}</dt>
+                <dd class="text-[14px] sm:text-[15px] font-bold text-brand-text sm:mt-1">{item.value}</dd>
+              </div>
+              <p class="text-[11.5px] sm:text-[12px] text-brand-secondary mt-1 sm:mt-0.5">{item.note}</p>
             </div>
           ))}
         </dl>
       </div>
 
+      <!-- پنل مسیرهای تجاری -->
       <aside aria-label={t.corridorsTitle} class="lg:col-span-5 w-full">
-        <div class="surface-card p-6 sm:p-7">
-          <div class="pb-4 mb-5 border-b border-brand-border">
-            <h2 class="text-[16.5px] font-bold text-brand-text">{t.corridorsTitle}</h2>
-            <p class="text-[13px] text-brand-secondary mt-1">{t.corridorsSub}</p>
+        <div class="surface-card p-5 sm:p-7">
+          <div class="pb-3.5 sm:pb-4 mb-4 sm:mb-5 border-b border-brand-border">
+            <h2 class="text-[15.5px] sm:text-[16.5px] font-bold text-brand-text">{t.corridorsTitle}</h2>
+            <p class="text-[12.5px] sm:text-[13px] text-brand-secondary mt-1">{t.corridorsSub}</p>
           </div>
 
           <ul class="divide-y divide-brand-border">
             {corridors.map((corridor) => (
-              <li class="py-4 first:pt-0 last:pb-0">
-                <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="text-[14.5px] font-semibold text-brand-text">{corridor.destination}</h3>
-                  <span class="text-[12px] text-brand-muted shrink-0">{corridor.border}</span>
+              <li class="py-3.5 sm:py-4 first:pt-0 last:pb-0">
+                <div class="flex flex-wrap items-baseline justify-between gap-1.5">
+                  <h3 class="text-[14px] sm:text-[14.5px] font-semibold text-brand-text">{corridor.destination}</h3>
+                  <span class="text-[11px] sm:text-[12px] text-brand-muted bg-brand-bg/60 px-2 py-0.5 rounded-[5px] border border-brand-border/60 shrink-0">
+                    {corridor.border}
+                  </span>
                 </div>
-                <p class="text-[13px] text-brand-secondary mt-1.5 leading-relaxed">{corridor.serviceType}</p>
+                <p class="text-[12.5px] sm:text-[13px] text-brand-secondary mt-1.5 leading-relaxed">{corridor.serviceType}</p>
                 {corridor.relatedProjectSlug && (
                   <a
                     href={`${projectPrefix}/${corridor.relatedProjectSlug}`}
-                    class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 transition-colors"
+                    class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 py-1 transition-colors"
                   >
                     <span>{t.viewSample}</span>
                     <span aria-hidden="true">{lang === 'fa' ? '←' : '→'}</span>

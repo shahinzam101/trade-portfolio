@@ -24,24 +24,26 @@ const ui = {
 const t = ui[lang];
 ---
 
-<section id="services" class="py-20 sm:py-24 border-b border-brand-border bg-brand-surface">
+<section id="services" class="py-14 sm:py-24 border-b border-brand-border bg-brand-surface">
   <div class="container-editorial">
     
-    <div class="max-w-2xl mb-12">
-      <p class="text-[12.5px] font-medium text-brand-muted mb-2">{t.title1}</p>
-      <h2 class="text-[26px] sm:text-[32px] font-bold text-brand-text leading-snug">{t.title2}</h2>
-      <p class="text-[15px] text-brand-secondary mt-3 leading-relaxed">{t.desc}</p>
+    <div class="max-w-2xl mb-8 sm:mb-12">
+      <p class="text-[12px] sm:text-[12.5px] font-medium text-brand-muted mb-1.5 sm:mb-2">{t.title1}</p>
+      <h2 class="text-[22px] sm:text-[32px] font-bold text-brand-text leading-snug">{t.title2}</h2>
+      <p class="text-[14px] sm:text-[15px] text-brand-secondary mt-2.5 sm:mt-3 leading-relaxed">{t.desc}</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 border-t border-brand-border rounded-[12px] overflow-hidden bg-brand-bg">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-5">
       {currentServices.map((service, index) => (
-        <div class="p-6 sm:p-8 border-b border-brand-border flex flex-col justify-between transition-colors hover:bg-brand-surface/40">
+        <div class="p-5 sm:p-7 rounded-[12px] bg-brand-bg border border-brand-border flex flex-col justify-between transition-colors hover:border-brand-border-strong">
           <div>
-            <span class="text-[12px] font-medium text-brand-muted block mb-2.5">
-              {lang === 'fa' ? `۰${index + 1}` : `0${index + 1}`}
-            </span>
-            <h3 class="text-[18px] font-bold text-brand-text">{service.title}</h3>
-            <p class="text-[14px] sm:text-[15px] text-brand-secondary mt-3 leading-[1.8]">{service.description}</p>
+            <div class="flex items-center justify-between mb-3">
+              <span class="inline-flex items-center justify-center w-7 h-7 rounded-[6px] bg-brand-surface border border-brand-border text-[11.5px] font-semibold text-brand-muted">
+                {lang === 'fa' ? `۰${index + 1}` : `0${index + 1}`}
+              </span>
+            </div>
+            <h3 class="text-[16.5px] sm:text-[18px] font-bold text-brand-text">{service.title}</h3>
+            <p class="text-[13.5px] sm:text-[15px] text-brand-secondary mt-2.5 leading-[1.8]">{service.description}</p>
           </div>
         </div>
       ))}
