@@ -1,6 +1,18 @@
 ---
 // src/components/Hero.astro
 import { companyInfo, tradeCorridors } from '../data/projects.js';
+
+// تعریف دقیق نوع زبان برای تایپ‌اسکریپت جهت رفع خطای 7053
+const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
+
+const info = companyInfo[lang];
+const corridors = tradeCorridors[lang];
+
+const ui = {
+  fa: { btnConsult: "درخواست مشاوره بازرگانی", btnProjects: "مشاهده پروژه‌ها", corridorsTitle: "مسیرها و کریدورهای عملیاتی", corridorsSub: "مقاصد اصلی صادرات و گمرکات خروجی تحت پوشش شرکت", viewSample: "مشاهده نمونه محموله" },
+  tr: { btnConsult: "Ticari Danışmanlık Alın", btnProjects: "Projeleri İncele", corridorsTitle: "Operasyonel Rotalar ve Koridorlar", corridorsSub: "Şirketimizin kapsadığı ana ihracat noktaları ve gümrükler", viewSample: "Örnek Sevkiyatı Gör" }
+};
+const t = ui[lang];
 ---
 
 <section class="bg-brand-bg border-b border-brand-border py-14 sm:py-20 lg:py-24">
@@ -8,98 +20,70 @@ import { companyInfo, tradeCorridors } from '../data/projects.js';
     
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
       
-      <!-- ستون سمت راست: معرفی شرکت و دکمه‌ها (7 ستون) -->
-      <div class="lg:col-span-7 text-right">
-        
+      <div class="lg:col-span-7">
         <p class="text-[13px] font-medium text-brand-gold tracking-wide mb-3">
-          {companyInfo.legalTitle}
+          {info.legalTitle}
         </p>
 
         <h1 class="text-[27px] sm:text-[36px] lg:text-[42px] font-bold text-brand-text leading-[1.35] tracking-tight text-balance">
-          {companyInfo.tagline}
+          {info.tagline}
         </h1>
 
         <p class="mt-5 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.85] max-w-2xl">
-          {companyInfo.description}
+          {info.description}
         </p>
 
-        <!-- CTA اصلی با بیشترین تأکید بصری + دکمه ثانویه شفاف -->
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a
-            href={companyInfo.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-primary"
-          >
-            درخواست مشاوره بازرگانی
+          <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
+            {t.btnConsult}
           </a>
 
-          <a
-            href="#projects"
-            class="btn-outline group"
-          >
-            <span>مشاهده پروژه‌ها</span>
-            <span aria-hidden="true" class="transition-transform duration-150 group-hover:-translate-x-1">&larr;</span>
+          <a href="#projects" class="btn-outline group flex items-center gap-2">
+            <span>{t.btnProjects}</span>
+            <span aria-hidden="true" class={`transition-transform duration-150 ${lang === 'fa' ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`}>
+              {lang === 'fa' ? '←' : '→'}
+            </span>
           </a>
         </div>
 
-        <!-- شاخص‌های عملیاتی -->
         <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-border">
-          {companyInfo.operationalHighlights.map((item) => (
-            <div class="sm:border-l sm:border-brand-border/60 sm:pl-4 last:border-l-0 last:pl-0">
+          {info.operationalHighlights.map((item: any) => (
+            <div class={`sm:border-brand-border/60 ${lang === 'fa' ? 'sm:border-r sm:pr-4' : 'sm:border-l sm:pl-4'} first:border-0 first:p-0`}>
               <dt class="text-[12px] text-brand-muted">{item.label}</dt>
               <dd class="text-[15px] font-bold text-brand-text mt-1">{item.value}</dd>
               <p class="text-[12px] text-brand-secondary mt-0.5">{item.note}</p>
             </div>
           ))}
         </dl>
-
       </div>
 
-      <!-- ستون سمت چپ: پنل مسیرهای تجاری با سطح #183630 -->
-      <aside aria-label="مسیرهای عملیاتی صادرات" class="lg:col-span-5 w-full">
+      <aside aria-label="Operasyonel Rotalar" class="lg:col-span-5 w-full">
         <div class="surface-card p-6 sm:p-7">
-          
           <div class="pb-4 mb-5 border-b border-brand-border">
-            <h2 class="text-[16.5px] font-bold text-brand-text">
-              مسیرها و کریدورهای عملیاتی
-            </h2>
-            <p class="text-[13px] text-brand-secondary mt-1">
-              مقاصد اصلی صادرات و گمرکات خروجی تحت پوشش شرکت
-            </p>
+            <h2 class="text-[16.5px] font-bold text-brand-text">{t.corridorsTitle}</h2>
+            <p class="text-[13px] text-brand-secondary mt-1">{t.corridorsSub}</p>
           </div>
 
           <ul class="divide-y divide-brand-border">
-            {tradeCorridors.map((corridor) => (
+            {corridors.map((corridor: any) => (
               <li class="py-4 first:pt-0 last:pb-0">
                 <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="text-[14.5px] font-semibold text-brand-text">
-                    {corridor.destination}
-                  </h3>
-                  <span class="text-[12px] text-brand-muted shrink-0">
-                    {corridor.border}
-                  </span>
+                  <h3 class="text-[14.5px] font-semibold text-brand-text">{corridor.destination}</h3>
+                  <span class="text-[12px] text-brand-muted shrink-0">{corridor.border}</span>
                 </div>
-                <p class="text-[13px] text-brand-secondary mt-1.5 leading-relaxed">
-                  {corridor.serviceType}
-                </p>
+                <p class="text-[13px] text-brand-secondary mt-1.5 leading-relaxed">{corridor.serviceType}</p>
                 {corridor.relatedProjectSlug && (
-                  <a
-                    href={`/projects/${corridor.relatedProjectSlug}`}
-                    class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 transition-colors"
-                  >
-                    <span>مشاهده نمونه محموله</span>
-                    <span aria-hidden="true">&larr;</span>
+                  <a href={`/projects/${corridor.relatedProjectSlug}`} class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 transition-colors">
+                    <span>{t.viewSample}</span>
+                    <span aria-hidden="true">{lang === 'fa' ? '←' : '→'}</span>
                   </a>
                 )}
               </li>
             ))}
           </ul>
-
         </div>
       </aside>
 
     </div>
-
   </div>
 </section>

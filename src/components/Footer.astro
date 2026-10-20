@@ -1,6 +1,45 @@
 ---
 // src/components/Footer.astro
 import { companyInfo } from '../data/projects.js';
+
+const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
+const info = companyInfo[lang];
+
+const ui = {
+  fa: {
+    quickAccess: "دسترسی سریع",
+    contactInfo: "اطلاعات تماس",
+    phone: "تلفن:",
+    wa: "واتس‌اپ بازرگانی:",
+    waLink: "ارسال پیام مستقیم ←",
+    email: "پست الکترونیک:",
+    rights: `© ۱۴۰۵ ${info.legalTitle}. تمامی حقوق محفوظ است.`,
+    dev: "طراحی و توسعه بر پایه استانداردهای تجارت بین‌الملل",
+    links: [
+      { label: "صفحه اصلی", href: "/fa" },
+      { label: "خدمات بازرگانی", href: "/fa#services" },
+      { label: "پروژه‌ها", href: "/fa#projects" },
+      { label: "درباره شرکت", href: "/fa#about" }
+    ]
+  },
+  tr: {
+    quickAccess: "Hızlı Erişim",
+    contactInfo: "İletişim Bilgileri",
+    phone: "Telefon:",
+    wa: "Ticari WhatsApp:",
+    waLink: "Doğrudan Mesaj Gönder →",
+    email: "E-posta:",
+    rights: `© 2026 ${info.legalTitle}. Tüm hakları saklıdır.`,
+    dev: "Uluslararası ticaret standartlarına göre tasarlandı ve geliştirildi",
+    links: [
+      { label: "Ana Sayfa", href: "/" },
+      { label: "Ticari Hizmetler", href: "/#services" },
+      { label: "Projeler", href: "/#projects" },
+      { label: "Şirket Hakkında", href: "/#about" }
+    ]
+  }
+};
+const t = ui[lang];
 ---
 
 <footer class="border-t border-brand-border bg-brand-bg pt-14 pb-20 sm:pb-14 text-[14px]">
@@ -8,69 +47,51 @@ import { companyInfo } from '../data/projects.js';
     
     <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-brand-border">
       
-      <!-- معرفی شرکت (5 ستون) -->
       <div class="md:col-span-5">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-8 h-8 rounded-[8px] bg-brand-surface border border-brand-border-strong flex items-center justify-center text-brand-text font-bold text-sm">
-            آ
+            A
           </div>
-          <span class="text-[16px] font-bold text-brand-text">{companyInfo.name}</span>
+          <span class="text-[16px] font-bold text-brand-text">{info.name}</span>
         </div>
-        <p class="text-brand-secondary text-[13.5px] leading-[1.85] max-w-sm">
-          {companyInfo.shortIntro}
-        </p>
-        <p class="text-brand-muted text-[12px] mt-4">
-          {companyInfo.location}
-        </p>
+        <p class="text-brand-secondary text-[13.5px] leading-[1.85] max-w-sm">{info.shortIntro}</p>
+        <p class="text-brand-muted text-[12px] mt-4">{info.location}</p>
       </div>
 
-      <!-- دسترسی سریع (3 ستون) -->
       <div class="md:col-span-3">
-        <h3 class="text-[13.5px] font-bold text-brand-text mb-4">دسترسی سریع</h3>
+        <h3 class="text-[13.5px] font-bold text-brand-text mb-4">{t.quickAccess}</h3>
         <ul class="space-y-2.5 text-[13px] text-brand-secondary">
-          <li><a href="/" class="hover:text-brand-text hover:underline underline-offset-4 transition-colors">صفحه اصلی</a></li>
-          <li><a href="/#services" class="hover:text-brand-text hover:underline underline-offset-4 transition-colors">خدمات بازرگانی</a></li>
-          <li><a href="/#projects" class="hover:text-brand-text hover:underline underline-offset-4 transition-colors">پروژه‌های انجام‌شده</a></li>
-          <li><a href="/#about" class="hover:text-brand-text hover:underline underline-offset-4 transition-colors">درباره شرکت</a></li>
+          {t.links.map((link: any) => (
+            <li><a href={link.href} class="hover:text-brand-text hover:underline underline-offset-4 transition-colors">{link.label}</a></li>
+          ))}
         </ul>
       </div>
 
-      <!-- راه‌های ارتباطی (4 ستون) -->
       <div class="md:col-span-4">
-        <h3 class="text-[13.5px] font-bold text-brand-text mb-4">اطلاعات تماس</h3>
+        <h3 class="text-[13.5px] font-bold text-brand-text mb-4">{t.contactInfo}</h3>
         <ul class="space-y-2.5 text-[13px] text-brand-secondary">
           <li>
-            <span class="text-brand-muted">تلفن: </span>
-            <a href={companyInfo.phoneHref} class="text-brand-secondary hover:text-brand-text transition-colors">
-              {companyInfo.phoneDisplay}
+            <span class="text-brand-muted">{t.phone} </span>
+            <a href={companyInfo.phoneHref} class="text-brand-secondary hover:text-brand-text transition-colors">{companyInfo.phoneDisplay}</a>
+          </li>
+          <li>
+            <span class="text-brand-muted">{t.wa} </span>
+            <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-text transition-colors">
+              {t.waLink}
             </a>
           </li>
           <li>
-            <span class="text-brand-muted">واتس‌اپ بازرگانی: </span>
-            <a
-              href={companyInfo.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-text transition-colors"
-            >
-              ارسال پیام مستقیم &larr;
-            </a>
-          </li>
-          <li>
-            <span class="text-brand-muted">پست الکترونیک: </span>
-            <a href={`mailto:${companyInfo.email}`} class="text-brand-secondary hover:text-brand-text transition-colors">
-              {companyInfo.email}
-            </a>
+            <span class="text-brand-muted">{t.email} </span>
+            <a href={`mailto:${companyInfo.email}`} class="text-brand-secondary hover:text-brand-text transition-colors">{companyInfo.email}</a>
           </li>
         </ul>
       </div>
 
     </div>
 
-    <!-- اطلاعات حقوقی -->
     <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-brand-muted">
-      <p>© ۱۴۰۵ {companyInfo.legalTitle}. تمامی حقوق محفوظ است.</p>
-      <p>طراحی و توسعه بر پایه استانداردهای تجارت بین‌الملل</p>
+      <p>{t.rights}</p>
+      <p>{t.dev}</p>
     </div>
 
   </div>

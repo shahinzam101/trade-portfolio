@@ -1,196 +1,78 @@
 // src/data/projects.js
 
-/**
- * اطلاعات هویتی و ارتباطی شرکت بازرگانی آیگون تجارت غرب
- * نکته: مقادیر شماره تماس و واتس‌اپ نمونه را با اطلاعات رسمی شرکت جایگزین نمایید.
- */
+// --- 1. COMPANY INFO ---
 export const companyInfo = {
-  name: "آیگون تجارت غرب",
-  legalTitle: "شرکت بازرگانی بین‌المللی آیگون تجارت غرب",
-  tagline: "از تأمین تا تحویل، در کنار تجارت شما.",
-  shortIntro: "مدیریت یکپارچه فرآیندهای صادرات، تأمین کالا، تشریفات گمرکی و لجستیک بین‌المللی با تمرکز بر بازارهای منطقه‌ای.",
-  description: "آیدین تجارت غرب در زمینه تأمین کالا از تولیدکنندگان داخلی، آماده‌سازی و بسته‌بندی استاندارد صادراتی، انجام تشریفات گمرکی و هماهنگی حمل‌ونقل بین‌المللی فعالیت می‌کند. هدف ما ایجاد فرآیندی شفاف، منظم و قابل اتکا برای طرف‌های تجاری است.",
-  whatsapp: "https://wa.me/989120000000", // [نیازمند جایگزینی با شماره رسمی واتس‌اپ شرکت]
-  phoneDisplay: "۰۴۴-۳۳۰۰۰۰۰۰", // [نیازمند جایگزینی با تلفن ثابت رسمی شرکت]
+  fa: {
+    name: "آیگون تجارت غرب",
+    legalTitle: "شرکت بازرگانی بین‌المللی آیگون تجارت غرب",
+    tagline: "از تأمین تا تحویل، در کنار تجارت شما.",
+    shortIntro: "مدیریت یکپارچه فرآیندهای صادرات، تأمین کالا، تشریفات گمرکی و لجستیک بین‌المللی با تمرکز بر بازارهای منطقه‌ای.",
+    description: "آیگون تجارت غرب در زمینه تأمین کالا از تولیدکنندگان داخلی، آماده‌سازی و بسته‌بندی استاندارد صادراتی، انجام تشریفات گمرکی و هماهنگی حمل‌ونقل بین‌المللی فعالیت می‌کند. هدف ما ایجاد فرآیندی شفاف، منظم و قابل اتکا برای طرف‌های تجاری است.",
+    location: "ایران، آذربایجان غربی — فعال در مرزهای تجاری غرب کشور و بنادر صادراتی",
+    operationalHighlights: [
+      { label: "حوزه فعالیت", value: "صادرات و تأمین کالا", note: "مدیریت فرآیند از مبدأ تولید تا مقصد" },
+      { label: "پوشش عملیاتی", value: "مرزهای غرب و شمال‌غرب", note: "بازرگان، جلفا، نوردوز و تمرچین" },
+      { label: "مدل همکاری", value: "مبتنی بر قرارداد رسمی", note: "شفافیت در اسناد، زمان‌بندی و تحویل" }
+    ]
+  },
+  tr: {
+    name: "Aygün Ticaret",
+    legalTitle: "Aygün Ticaret Uluslararası İhracat Şirketi",
+    tagline: "Tedarikten Teslimata, Ticaretinizin Yanında.",
+    shortIntro: "Bölgesel pazarlara odaklanarak ihracat, tedarik, gümrükleme ve uluslararası lojistik süreçlerinin entegre yönetimi.",
+    description: "Aygün Ticaret, yerli üreticilerden ürün tedariki, standart ihracat paketlemesi, gümrükleme işlemleri ve uluslararası lojistik koordinasyonu alanlarında faaliyet göstermektedir. Amacımız ticari ortaklarımız için şeffaf, düzenli ve güvenilir bir süreç yaratmaktır.",
+    location: "İran, Batı Azerbaycan — Batı sınır kapılarında ve ihracat limanlarında aktif.",
+    operationalHighlights: [
+      { label: "Faaliyet Alanı", value: "İhracat ve Tedarik", note: "Üretimden teslimata kadar süreç yönetimi" },
+      { label: "Operasyonel Kapsam", value: "Batı Sınır Kapıları", note: "Bazargan, Culfa, Norduz, Temerçin" },
+      { label: "İşbirliği Modeli", value: "Resmi Sözleşme Odaklı", note: "Belgelerde ve teslimatta şeffaflık" }
+    ]
+  },
+  // اطلاعات تماس مشترک بین زبان‌ها
+  whatsapp: "https://wa.me/989120000000",
+  phoneDisplay: "+98 44 33000000",
   phoneHref: "tel:+984433000000",
-  email: "info@aydintejarat.com", // [در صورت وجود ایمیل رسمی جایگزین شود]
-  location: "ایران، آذربایجان غربی — فعال در مرزهای تجاری غرب کشور و بنادر صادراتی",
-  operationalHighlights: [
-    {
-      label: "حوزه فعالیت",
-      value: "صادرات و تأمین کالا",
-      note: "مدیریت فرآیند از مبدأ تولید تا مقصد"
-    },
-    {
-      label: "پوشش عملیاتی",
-      value: "مرزهای غرب و شمال‌غرب",
-      note: "بازرگان، جلفا، نوردوز و تمرچین"
-    },
-    {
-      label: "مدل همکاری",
-      value: "مبتنی بر قرارداد رسمی",
-      note: "شفافیت در اسناد، زمان‌بندی و تحویل"
-    }
+  email: "info@ayguntrade.com",
+};
+
+// --- 2. SERVICES ---
+export const services = {
+  fa: [
+    { title: "تأمین کالا و ارتباط با تولیدکنندگان", description: "بررسی تامین‌کنندگان داخلی، کنترل تطابق مشخصات فنی کالا با سفارش خریدار و آماده‌سازی محموله پیش از ارسال." },
+    { title: "مدیریت فرآیند صادرات", description: "تنظیم اسناد تجاری، اخذ گواهی مبدأ و مجوزهای استاندارد مورد نیاز کشور مقصد مطابق با مقررات جاری." },
+    { title: "تشریفات و ترخیص گمرکی", description: "انجام امور اظهار، ارزیابی و ترخیص کالا در گمرکات خروجی کشور با حضور کارشناسان مجرب امور گمرکی." },
+    { title: "هماهنگی حمل‌ونقل و لجستیک", description: "برنامه‌ریزی حمل جاده‌ای و کانتینری، نظارت بر پالت‌بندی، مهاربندی استاندارد و پیگیری مسیر تا تحویل در مقصد." }
+  ],
+  tr: [
+    { title: "Tedarik ve Üretici İletişimi", description: "Yerli tedarikçilerin incelenmesi, ürünlerin teknik özelliklerinin siparişle uyumunun kontrolü ve sevkiyat öncesi hazırlık." },
+    { title: "İhracat Süreç Yönetimi", description: "Ticari belgelerin düzenlenmesi, menşe şahadetnamesi ve hedef ülkenin gerektirdiği standart izinlerinin alınması." },
+    { title: "Gümrükleme İşlemleri", description: "Deneyimli gümrük uzmanlarımızla çıkış gümrüklerinde beyan, ekspertiz ve gümrükleme işlemlerinin yürütülmesi." },
+    { title: "Lojistik Koordinasyonu", description: "Karayolu ve konteyner taşımacılığının planlanması, paletleme denetimi ve teslimata kadar güzergah takibi." }
   ]
 };
 
-/**
- * فهرست خدمات اصلی شرکت
- */
-export const services = [
-  {
-    id: "sourcing",
-    title: "تأمین کالا و ارتباط با تولیدکنندگان",
-    description: "بررسی تامین‌کنندگان داخلی، کنترل تطابق مشخصات فنی کالا با سفارش خریدار و آماده‌سازی محموله پیش از ارسال."
-  },
-  {
-    id: "export-management",
-    title: "مدیریت فرآیند صادرات",
-    description: "تنظیم اسناد تجاری، اخذ گواهی مبدأ و مجوزهای استاندارد مورد نیاز کشور مقصد مطابق با مقررات جاری."
-  },
-  {
-    id: "customs",
-    title: "تشریفات و ترخیص گمرکی",
-    description: "انجام امور اظهار، ارزیابی و ترخیص کالا در گمرکات خروجی کشور با حضور کارشناسان مجرب امور گمرکی."
-  },
-  {
-    id: "logistics",
-    title: "هماهنگی حمل‌ونقل و لجستیک",
-    description: "برنامه‌ریزی حمل جاده‌ای و کانتینری، نظارت بر پالت‌بندی، مهاربندی استاندارد و پیگیری مسیر تا تحویل در مقصد."
-  }
-];
+// --- 3. TRADE CORRIDORS ---
+export const tradeCorridors = {
+  fa: [
+    { destination: "ترکیه (استانبول و شهرهای صنعتی)", border: "گمرک بازرگان", serviceType: "ترانزیت زمینی، صادرات کالاهای مصرفی و صنعتی", relatedProjectSlug: "camping-gear-turkey" },
+    { destination: "گرجستان و حوزه قفقاز (تفلیس)", border: "گمرک جلفا / نوردوز", serviceType: "حمل محموله‌های کیسه‌ای (جامبوبگ) و مواد اولیه معدنی", relatedProjectSlug: "industrial-minerals-export" },
+    { destination: "عراق و اقلیم کردستان (اربیل)", border: "گمرک تمرچین / باشماق", serviceType: "ارسال کانتینری مصالح ساختمانی و کالاهای بازرگانی", relatedProjectSlug: "construction-materials-iraq" }
+  ],
+  tr: [
+    { destination: "Türkiye (İstanbul ve Sanayi Şehirleri)", border: "Bazargan Gümrüğü", serviceType: "Karayolu transit, tüketim ve sanayi malları ihracatı", relatedProjectSlug: "camping-gear-turkey" },
+    { destination: "Gürcistan ve Kafkasya (Tiflis)", border: "Culfa / Norduz Gümrüğü", serviceType: "Jumbo çanta (Big bag) ve madeni hammadde taşımacılığı", relatedProjectSlug: "industrial-minerals-export" },
+    { destination: "Irak ve Kürdistan Bölgesi (Erbil)", border: "Temerçin / Başmak Gümrüğü", serviceType: "İnşaat malzemeleri ve ticari malların konteyner taşımacılığı", relatedProjectSlug: "construction-materials-iraq" }
+  ]
+};
 
-/**
- * مسیرها و کریدورهای عملیاتی (نمایش در بخش معرفی)
- */
-export const tradeCorridors = [
-  {
-    destination: "ترکیه (استانبول و شهرهای صنعتی)",
-    border: "گمرک بازرگان",
-    serviceType: "ترانزیت زمینی، صادرات کالاهای مصرفی و صنعتی",
-    relatedProjectSlug: "camping-gear-turkey"
-  },
-  {
-    destination: "گرجستان و حوزه قفقاز (تفلیس)",
-    border: "گمرک جلفا / نوردوز",
-    serviceType: "حمل محموله‌های کیسه‌ای (جامبوبگ) و مواد اولیه معدنی",
-    relatedProjectSlug: "industrial-minerals-export"
-  },
-  {
-    destination: "عراق و اقلیم کردستان (اربیل)",
-    border: "گمرک تمرچین / باشماق",
-    serviceType: "ارسال کانتینری مصالح ساختمانی و کالاهای بازرگانی",
-    relatedProjectSlug: "construction-materials-iraq"
-  }
-];
-
-/**
- * آرشیو پروژه‌ها و محموله‌های انجام‌شده
- * نکته: تصاویر فعلی از آرشیو مرتبط با لجستیک، انبارداری و حمل کانتینری انتخاب شده‌اند.
- * پیشنهاد می‌شود پیش از انتشار نهایی، تصاویر مستند هر محموله در پوشه public/images قرار گیرد.
- */
-export const projects = [
-  {
-    slug: "camping-gear-turkey",
-    title: "صادرات تجهیزات کوهنوردی و کمپینگ به ترکیه",
-    category: "کالاهای تخصصی و ورزشی",
-    clientLocation: "استانبول، ترکیه",
-    date: "پاییز ۱۴۰۴",
-    productType: "تجهیزات کمپینگ و ملزومات کوهنوردی",
-    volume: "۳ کانتینر (پالت‌بندی شده)",
-    transportType: "حمل زمینی (ترانزیت جاده‌ای)",
-    customsOrigin: "گمرک بازرگان",
-    servicesProvided: "تأمین، بسته‌بندی صادراتی، تشریفات گمرکی و حمل تا انبار مقصد",
-    summary: "تأمین، بسته‌بندی روی پالت‌های استاندارد و انجام تشریفات گمرکی محموله تجهیزات کوهنوردی جهت ارسال از مرز بازرگان به استانبول.",
-    // تصویر مرتبط با انبارداری، پالت‌بندی و آماده‌سازی محموله صادراتی
-    coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop",
-    coverAlt: "انبار پالت‌بندی و آماده‌سازی محموله صادراتی تجهیزات",
-    gallery: [
-      {
-        url: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80&auto=format&fit=crop",
-        alt: "بسته‌بندی و چیدمان کارتن‌های کالا در انبار پیش از بارگیری"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&q=80&auto=format&fit=crop",
-        alt: "ناوگان حمل‌ونقل جاده‌ای جهت ترانزیت محموله به مرز بازرگان"
-      }
-    ],
-    operationalSteps: [
-      "بررسی کیفی اقلام و تطابق تعداد و مشخصات فنی با سفارش ثبت‌شده در مبدأ.",
-      "بسته‌بندی مقاوم در برابر رطوبت و ضربه بر روی پالت‌های استاندارد جهت حمل جاده‌ای.",
-      "تنظیم اسناد صادراتی، اخذ گواهی مبدأ و انجام تشریفات گمرکی در مرز بازرگان.",
-      "هماهنگی ترانزیت جاده‌ای و تحویل محموله در انبار مقصد در شهر استانبول."
-    ],
-    fullDescription: [
-      "این عملیات شامل تأمین، آماده‌سازی و صادرات محموله تجهیزات کوهنوردی و کمپینگ به مقصد استانبول ترکیه بود. با توجه به تنوع اقلام و لزوم حفظ سلامت فیزیکی کالاها در طول مسیر جاده‌ای، تمرکز اصلی بر دسته‌بندی دقیق و پالت‌بندی استاندارد پیش از بارگیری قرار گرفت.",
-      "پس از تکمیل فرآیند کنترل و بسته‌بندی در انبار مبدأ، اسناد تجاری و گمرکی تنظیم شد و محموله از طریق گمرک بازرگان پس از طی مراحل قانونی، به سمت انبار طرف تجاری در ترکیه ارسال گردید."
-    ],
-    documentedOutcome: "تحویل کامل محموله مطابق با لیست عدل‌بندی (Packing List) در انبار مقصد و تکمیل فرآیند تسویه گمرکی."
-  },
-  {
-    slug: "industrial-minerals-export",
-    title: "صادرات مواد معدنی فرآوری‌شده به گرجستان",
-    category: "مواد اولیه و معدنی",
-    clientLocation: "تفلیس، گرجستان",
-    date: "تابستان ۱۴۰۴",
-    productType: "مواد معدنی صنعتی (بسته‌بندی جامبوبگ)",
-    volume: "۴۵۰ تن",
-    transportType: "حمل زمینی",
-    customsOrigin: "گمرک جلفا / نوردوز",
-    servicesProvided: "تأمین از مبدأ، کیسه‌گیری استاندارد، امور گمرکی و حمل زمینی",
-    summary: "تأمین مستقیم مواد معدنی، بسته‌بندی در جامبوبگ‌های مقاوم یک‌تنی و هماهنگی ارسال زمینی به واحدهای صنعتی در تفلیس.",
-    coverImage: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&q=80&auto=format&fit=crop",
-    coverAlt: "عملیات لجستیک و جابه‌جایی محموله‌های صنعتی و معدنی",
-    gallery: [
-      {
-        url: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80&auto=format&fit=crop",
-        alt: "انبارش و آماده‌سازی محموله‌های صنعتی"
-      },
-      {
-        url: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=900&q=80&auto=format&fit=crop",
-        alt: "مدیریت کانتینر و حمل بارهای صادراتی"
-      }
-    ],
-    operationalSteps: [
-      "دریافت برگه آنالیز فنی محموله پیش از بارگیری جهت تطابق با مشخصات درخواستی خریدار.",
-      "بسته‌بندی در جامبوبگ‌های دولایه مقاوم در برابر نفوذ رطوبت.",
-      "هماهنگی ناوگان حمل سنگین و انجام تشریفات گمرکی در مرز خروجی."
-    ],
-    fullDescription: [
-      "در این پروژه، تأمین و ارسال مواد معدنی فرآوری‌شده برای مصرف در خطوط تولید صنعتی در گرجستان برنامه‌ریزی و اجرا شد. به دلیل حساسیت مواد معدنی به رطوبت و شرایط محیطی، استفاده از کیسه‌های جامبوبگ استاندارد در دستور کار قرار گرفت.",
-      "فرآیند بارگیری، توزین و پلمپ گمرکی با نظارت مستمر انجام شد و محموله‌ها طبق زمان‌بندی توافق‌شده از مرز عبور کرده و در اختیار خریدار قرار گرفتند."
-    ],
-    documentedOutcome: "ارسال منظم پارت‌های محموله مطابق با آنالیز توافق‌شده و تحویل در محل کارخانه مقصد."
-  },
-  {
-    slug: "construction-materials-iraq",
-    title: "صادرات سرامیک و سنگ‌های ساختمانی به اقلیم کردستان",
-    category: "مصالح ساختمانی",
-    clientLocation: "اربیل، عراق",
-    date: "بهار ۱۴۰۴",
-    productType: "سرامیک و سنگ‌های ساختمانی فرآوری‌شده",
-    volume: "۱۲ کانتینر ۲۰ فوت",
-    transportType: "ترانزیت زمینی",
-    customsOrigin: "گمرک تمرچین",
-    servicesProvided: "مهاربندی تخصصی، بیمه باربری، ترخیص مرزی و تحویل در پروژه",
-    summary: "بسته‌بندی روی پالت‌های چوبی تقویت‌شده، مهاربندی تخصصی و ارسال محموله سنگ و سرامیک ساختمانی به مقصد اربیل.",
-    coverImage: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80&auto=format&fit=crop",
-    coverAlt: "حمل کانتینری و لجستیک محموله‌های صادراتی مصالح ساختمانی",
-    gallery: [
-      {
-        url: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80&auto=format&fit=crop",
-        alt: "بسته‌بندی و مهاربندی پالت‌های صادراتی"
-      }
-    ],
-    operationalSteps: [
-      "استفاده از پالت‌ها و خرک‌های چوبی مستحکم جهت جلوگیری از آسیب‌دیدگی قطعات در مسیر.",
-      "اخذ پوشش بیمه باربری بین‌المللی از مبدأ بارگیری تا محل تخلیه.",
-      "انجام تشریفات گمرکی در مرز تمرچین و هماهنگی تخلیه در محل پروژه."
-    ],
-    fullDescription: [
-      "حمل و صادرات مصالح ساختمانی شکننده نظیر سرامیک و سنگ‌های ابعاد بزرگ، نیازمند دقت ویژه در مرحله بارگیری و مهاربندی داخل کانتینر است. در این پروژه، تمامی پالت‌ها پیش از بارگیری تسمه‌کشی و ایمن‌سازی شدند.",
-      "با هماهنگی انجام‌شده در گمرک تمرچین، تشریفات مرزی بدون معطلی انجام شد و محموله در محل پروژه ساختمانی در شهر اربیل تحویل گردید."
-    ],
-    documentedOutcome: "تحویل سالم پالت‌های سنگ و سرامیک در محل پروژه بدون آسیب‌دیدگی در فرآیند حمل‌ونقل."
-  }
-];
+// --- 4. PROJECTS ---
+export const projects = {
+  fa: [
+    { slug: "camping-gear-turkey", title: "صادرات تجهیزات کوهنوردی و کمپینگ به ترکیه", category: "کالاهای تخصصی و ورزشی", clientLocation: "استانبول، ترکیه", date: "پاییز ۱۴۰۴", summary: "تأمین، بسته‌بندی روی پالت‌های استاندارد و انجام تشریفات گمرکی محموله تجهیزات کوهنوردی.", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop" },
+    // ... سایر پروژه‌ها ...
+  ],
+  tr: [
+    { slug: "camping-gear-turkey", title: "Türkiye'ye Kamp ve Dağcılık Ekipmanları İhracatı", category: "Özel ve Spor Ürünler", clientLocation: "İstanbul, Türkiye", date: "Sonbahar 2025", summary: "Kamp ekipmanlarının tedariki, standart paletlerde paketlenmesi ve gümrükleme işlemleri.", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80&auto=format&fit=crop" },
+    // ... سایر پروژه‌ها ...
+  ]
+};

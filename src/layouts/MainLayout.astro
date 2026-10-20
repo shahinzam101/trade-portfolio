@@ -6,55 +6,35 @@ import WhatsAppCTA from '../components/WhatsAppCTA.astro';
 import Footer from '../components/Footer.astro';
 import { companyInfo } from '../data/projects.js';
 
-const {
-  title = companyInfo.name,
-  description = companyInfo.description,
-  hideBottomCTA = false
-} = Astro.props;
+// اگر آدرس با /fa شروع شود، زبان fa است، وگرنه tr (پیش‌فرض) است
+const lang = Astro.url.pathname.startsWith('/fa') ? 'fa' : 'tr';
+const dir = lang === 'fa' ? 'rtl' : 'ltr';
+const info = companyInfo[lang] || companyInfo.tr;
 
-const pageTitle = title === companyInfo.name ? `${companyInfo.name} | بازرگانی و صادرات بین‌المللی` : `${title} | ${companyInfo.name}`;
+const { title = info.name, description = info.shortIntro, hideBottomCTA = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fa_IR" />
-    <meta property="og:site_name" content={companyInfo.name} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={description} />
-
-    <!-- فونت وزیرمتن -->
+    <!-- لود همزمان فونت‌های Montserrat (ترکی) و Vazirmatn (فارسی) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
 
-  <body class="min-h-screen flex flex-col bg-brand-bg text-brand-text selection:bg-brand-gold selection:text-brand-bg">
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[100] focus:bg-brand-gold focus:text-brand-bg focus:px-4 focus:py-2 focus:rounded-[10px] focus:font-semibold focus:text-sm"
-    >
-      پرش به محتوای اصلی
-    </a>
-
+  <!-- اعمال کلاس فونت بر اساس زبان -->
+  <body class={`min-h-screen flex flex-col bg-brand-bg text-brand-text selection:bg-brand-gold selection:text-brand-bg ${lang === 'fa' ? 'font-vazir' : 'font-montserrat'}`}>
     <Navbar />
-
     <main id="main-content" class="flex-grow">
       <slot />
     </main>
-
     <WhatsAppCTA hideSection={hideBottomCTA} />
-
     <Footer />
   </body>
 </html>

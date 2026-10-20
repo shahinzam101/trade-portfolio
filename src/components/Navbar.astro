@@ -1,96 +1,81 @@
 ---
 // src/components/Navbar.astro
 import { companyInfo } from '../data/projects.js';
+import LanguagePicker from './LanguagePicker.astro';
 
-const navLinks = [
-  { label: "صفحه اصلی", href: "/" },
-  { label: "خدمات", href: "/#services" },
-  { label: "پروژه‌ها", href: "/#projects" },
-  { label: "درباره ما", href: "/#about" },
-  { label: "تماس با ما", href: "#contact" }
-];
+const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
+const info = companyInfo[lang];
+
+const ui = {
+  fa: {
+    subtitle: "بازرگانی و صادرات بین‌المللی",
+    btnConsult: "درخواست مشاوره",
+    btnConsultWa: "درخواست مشاوره در واتس‌اپ",
+    links: [
+      { label: "صفحه اصلی", href: "/fa" },
+      { label: "خدمات", href: "/fa#services" },
+      { label: "پروژه‌ها", href: "/fa#projects" },
+      { label: "درباره ما", href: "/fa#about" },
+      { label: "تماس با ما", href: "#contact" }
+    ]
+  },
+  tr: {
+    subtitle: "Uluslararası Ticaret ve İhracat",
+    btnConsult: "Danışmanlık Alın",
+    btnConsultWa: "WhatsApp'tan Danışmanlık Alın",
+    links: [
+      { label: "Ana Sayfa", href: "/" },
+      { label: "Hizmetler", href: "/#services" },
+      { label: "Projeler", href: "/#projects" },
+      { label: "Hakkımızda", href: "/#about" },
+      { label: "İletişim", href: "#contact" }
+    ]
+  }
+};
+const t = ui[lang];
 ---
 
 <header class="sticky top-0 z-40 bg-brand-bg border-b border-brand-border">
   <div class="container-editorial h-[72px] flex items-center justify-between gap-6">
     
-    <!-- نشان برند و نام شرکت -->
-    <a href="/" class="flex items-center gap-3 group focus:outline-none">
+    <a href={lang === 'fa' ? '/fa' : '/'} class="flex items-center gap-3 group focus:outline-none">
       <div class="w-[34px] h-[34px] rounded-[8px] bg-brand-surface border border-brand-border-strong flex items-center justify-center text-brand-text font-bold text-[15px] transition-colors group-hover:border-brand-secondary">
-        آ
+        A
       </div>
       <div class="flex flex-col">
-        <span class="text-[15.5px] font-bold text-brand-text leading-tight">
-          {companyInfo.name}
-        </span>
-        <span class="text-[11px] text-brand-muted leading-none mt-1">
-          بازرگانی و صادرات بین‌المللی
-        </span>
+        <span class="text-[15.5px] font-bold text-brand-text leading-tight">{info.name}</span>
+        <span class="text-[11px] text-brand-muted leading-none mt-1">{t.subtitle}</span>
       </div>
     </a>
 
-    <!-- لینک‌های ناوبری دسکتاپ -->
     <nav aria-label="ناوبری اصلی" class="hidden md:flex items-center gap-8">
-      {navLinks.map((item) => (
-        <a href={item.href} class="nav-link">
-          {item.label}
-        </a>
+      {t.links.map((item: any) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
       ))}
     </nav>
 
-    <!-- دکمه مشاوره ظریف‌تر و دکمه منوی موبایل -->
-    <div class="flex items-center gap-3">
-      <a
-        href={companyInfo.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden sm:inline-flex btn-primary-sm"
-      >
-        درخواست مشاوره
+    <div class="flex items-center gap-2 sm:gap-3">
+      <LanguagePicker />
+      <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex btn-primary-sm">
+        {t.btnConsult}
       </a>
-
-      <button
-        id="mobile-menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-navigation"
-        aria-label="باز کردن منوی ناوبری"
-        class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[8px] bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border-strong transition-colors"
-      >
-        <svg id="icon-menu-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-        <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
+      <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[8px] bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border-strong transition-colors">
+        <svg id="icon-menu-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
+        <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
     </div>
-
   </div>
 
-  <!-- منوی بازشونده موبایل -->
-  <nav
-    id="mobile-navigation"
-    aria-label="منوی موبایل"
-    class="hidden md:hidden border-t border-brand-border bg-brand-surface"
-  >
+  <nav id="mobile-navigation" class="hidden md:hidden border-t border-brand-border bg-brand-surface shadow-xl">
     <div class="container-editorial py-4 flex flex-col gap-1">
-      {navLinks.map((item) => (
-        <a
-          href={item.href}
-          class="mobile-nav-link text-[14.5px] font-medium text-brand-secondary hover:text-brand-text py-2.5 border-b border-brand-border/60 last:border-b-0 transition-colors"
-        >
+      {t.links.map((item: any) => (
+        <a href={item.href} class="mobile-nav-link text-[14.5px] font-medium text-brand-secondary hover:text-brand-text py-2.5 border-b border-brand-border/60 last:border-b-0 transition-colors">
           {item.label}
         </a>
       ))}
       <div class="pt-3 mt-1">
-        <a
-          href={companyInfo.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="w-full btn-primary"
-        >
-          درخواست مشاوره در واتس‌اپ
+        <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="w-full btn-primary">
+          {t.btnConsultWa}
         </a>
       </div>
     </div>
@@ -109,7 +94,6 @@ const navLinks = [
 
     const setMenuState = (isOpen) => {
       toggleBtn.setAttribute('aria-expanded', String(isOpen));
-      toggleBtn.setAttribute('aria-label', isOpen ? 'بستن منوی ناوبری' : 'باز کردن منوی ناوبری');
       mobileNav.classList.toggle('hidden', !isOpen);
       iconOpen?.classList.toggle('hidden', isOpen);
       iconClose?.classList.toggle('hidden', !isOpen);
@@ -120,15 +104,6 @@ const navLinks = [
       setMenuState(!currentlyOpen);
     });
 
-    links.forEach((link) => {
-      link.addEventListener('click', () => setMenuState(false));
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && toggleBtn.getAttribute('aria-expanded') === 'true') {
-        setMenuState(false);
-        toggleBtn.focus();
-      }
-    });
+    links.forEach((link) => { link.addEventListener('click', () => setMenuState(false)); });
   })();
 </script>
