@@ -1,47 +1,31 @@
 ---
-// این فایل هم برای src/pages/index.astro و هم src/pages/fa/index.astro کاربرد دارد.
+// src/pages/index.astro
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import Services from '../components/Services.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { projects, companyInfo } from '../data/projects.js';
+import content from '../data/content.json';
 
-const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
-const info = companyInfo[lang];
-const currentProjects = projects[lang];
+const info = content.companyInfo.tr;
+const currentProjects = content.projects.tr;
 
-const ui = {
-  fa: {
-    projTitle1: "سوابق اجرایی",
-    projTitle2: "محموله‌ها و پروژه‌های انجام‌شده",
-    projDesc: "گزیده‌ای از عملیات‌های تأمین، تشریفات گمرکی و ارسال محموله‌های صادراتی به کشورهای همسایه.",
-    aboutTitle1: `درباره ${info.name}`,
-    aboutTitle2: "رویکرد ما در مدیریت ریسک و لجستیک صادراتی",
-    aboutP1: "در تجارت برون‌مرزی، هماهنگی میان آماده‌سازی کالا در کارخانه، بسته‌بندی متناسب با شیوه حمل و دقت در تنظیم اسناد گمرکی، نقش تعیین‌کننده‌ای در تحویل به‌موقع محموله دارد.",
-    aboutP2: `شرکت بازرگانی ${info.name} با تمرکز بر مرزهای تجاری غرب و شمال‌غرب کشور، فرآیندهای اجرایی را به‌گونه‌ای مدیریت می‌کند که خریدار و تولیدکننده بدون درگیری با پیچیدگی‌های اداری و ترانزیتی، تجارت خود را پیش ببرند.`
-  },
-  tr: {
-    projTitle1: "Geçmiş Projeler",
-    projTitle2: "Tamamlanan Sevkiyatlar ve Projeler",
-    projDesc: "Tedarik, gümrükleme ve komşu ülkelere yönelik ihracat operasyonlarımızdan örnekler.",
-    aboutTitle1: `${info.name} Hakkında`,
-    aboutTitle2: "İhracat Lojistiği ve Risk Yönetimi Yaklaşımımız",
-    aboutP1: "Sınır ötesi ticarette; fabrikada ürün hazırlığı, taşıma yöntemine uygun paketleme ve gümrük belgelerinin doğru düzenlenmesi arasındaki koordinasyon, sevkiyatın zamanında teslim edilmesinde belirleyici bir rol oynar.",
-    aboutP2: `${info.name} şirketi, sınır kapılarına odaklanarak operasyonel süreçleri yönetir. Böylece alıcı ve üretici, idari karmaşaya girmeden ticaretlerini sürdürebilirler.`
-  }
+const t = {
+  projTitle1: "Geçmiş Projeler",
+  projTitle2: "Tamamlanan Sevkiyatlar ve Projeler",
+  projDesc: "Tedarik, gümrükleme ve komşu ülkelere yönelik ihracat operasyonlarımızdan örnekler.",
+  aboutTitle1: `${info.name} Hakkında`,
+  aboutTitle2: "İhracat Lojistiği ve Risk Yönetimi Yaklaşımımız",
+  aboutP1: "Sınır ötesi ticarette; fabrikada ürün hazırlığı, taşıma yöntemine uygun paketleme ve gümrük belgelerinin doğru düzenlenmesi arasındaki koordinasyon, sevkiyatın zamanında teslim edilmesinde belirleyici bir rol oynar.",
+  aboutP2: `${info.name} şirketi, sınır kapılarına odaklanarak operasyonel süreçleri yönetir. Böylece alıcı ve üretici, idari karmaşaya girmeden ticaretlerini sürdürebilirler.`
 };
-const t = ui[lang];
 ---
 
 <MainLayout title={info.name}>
-  
   <Hero />
-
   <Services />
 
   <section id="projects" class="py-20 sm:py-24 border-b border-brand-border bg-brand-bg">
     <div class="container-editorial">
-      
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
         <div>
           <p class="text-[12.5px] font-medium text-brand-muted mb-2">{t.projTitle1}</p>
@@ -51,30 +35,25 @@ const t = ui[lang];
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {currentProjects.map((project: any) => (
+        {currentProjects.map((project) => (
           <ProjectCard project={project} />
         ))}
       </div>
-
     </div>
   </section>
 
   <section id="about" class="py-20 sm:py-24 bg-brand-surface border-b border-brand-border">
     <div class="container-editorial">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        
         <div class="lg:col-span-5">
           <p class="text-[12.5px] font-medium text-brand-muted mb-2">{t.aboutTitle1}</p>
           <h2 class="text-[26px] sm:text-[32px] font-bold text-brand-text leading-snug">{t.aboutTitle2}</h2>
         </div>
-
         <div class="lg:col-span-7 space-y-5 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.9]">
           <p>{t.aboutP1}</p>
           <p>{t.aboutP2}</p>
         </div>
-
       </div>
     </div>
   </section>
-
 </MainLayout>

@@ -1,70 +1,40 @@
 ---
 // src/pages/projects/[slug].astro
 import MainLayout from '../../layouts/MainLayout.astro';
-import { projects } from '../../data/projects.js';
+import content from '../../data/content.json';
 
 export function getStaticPaths() {
-  const langList: ('fa' | 'tr')[] = ['tr', 'fa'];
-
-  return langList.flatMap((lang) => {
-    const list = projects[lang] || [];
-    return list.map((project: any) => ({
-      params: { slug: project.slug },
-      props: { project, lang },
-    }));
-  });
+  return content.projects.tr.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
 }
 
 const { project } = Astro.props;
 
-// تشخیص زبان از روی آدرس صفحه (اگر با /fa شروع شود، فارسی است)
-const lang = (Astro.url.pathname.startsWith('/fa') ? 'fa' : 'tr') as 'fa' | 'tr';
+const otherProjects = content.projects.tr
+  .filter((item) => item.slug !== project.slug)
+  .slice(0, 2);
 
-const projectList = (projects[lang] || projects.tr) as any[];
-const otherProjects = projectList.filter((item: any) => item.slug !== project.slug).slice(0, 2);
-
-const ui = {
-  fa: {
-    home: "صفحه اصلی",
-    projects: "پروژه‌ها",
-    specTitle: "مشخصات کلیدی محموله",
-    dest: "مقصد صادرات",
-    prodType: "نوع محصول",
-    vol: "حجم / تعداد محموله",
-    transType: "روش حمل‌ونقل",
-    customs: "گمرک مبدأ",
-    time: "بازه زمانی",
-    services: "خدمات ارائه‌شده",
-    processTitle: "شرح فرآیند و عملیات اجرایی",
-    outcomeTitle: "نتیجه عملیات",
-    stepsTitle: "مراحل اجرایی انجام‌شده",
-    galleryTitle: "تصاویر تکمیلی فرآیند آماده‌سازی و حمل",
-    otherTitle: "سایر پروژه‌های صادراتی",
-    backLink: "بازگشت به فهرست تمام پروژه‌ها",
-    arrow: "←"
-  },
-  tr: {
-    home: "Ana Sayfa",
-    projects: "Projeler",
-    specTitle: "Sevkiyat Temel Özellikleri",
-    dest: "İhracat Hedefi",
-    prodType: "Ürün Türü",
-    vol: "Miktar / Hacim",
-    transType: "Taşıma Yöntemi",
-    customs: "Çıkış Gümrüğü",
-    time: "Zaman Dilimi",
-    services: "Sağlanan Hizmetler",
-    processTitle: "Süreç ve Operasyon Detayları",
-    outcomeTitle: "Operasyon Sonucu",
-    stepsTitle: "Uygulanan Operasyon Adımları",
-    galleryTitle: "Hazırlık ve Sevkiyat Görselleri",
-    otherTitle: "Diğer İhracat Projeleri",
-    backLink: "Tüm Projeler Listesine Dön",
-    arrow: "→"
-  }
+const t = {
+  home: "Ana Sayfa",
+  projects: "Projeler",
+  specTitle: "Sevkiyat Temel Özellikleri",
+  dest: "İhracat Hedefi",
+  prodType: "Ürün Türü",
+  vol: "Miktar / Hacim",
+  transType: "Taşıma Yöntemi",
+  customs: "Çıkış Gümrüğü",
+  time: "Zaman Dilimi",
+  services: "Sağlanan Hizmetler",
+  processTitle: "Süreç ve Operasyon Detayları",
+  outcomeTitle: "Operasyon Sonucu",
+  stepsTitle: "Uygulanan Operasyon Adımları",
+  galleryTitle: "Hazırlık ve Sevkiyat Görselleri",
+  otherTitle: "Diğer İhracat Projeleri",
+  backLink: "Tüm Projeler Listesine Dön",
+  arrow: "→"
 };
-
-const t = ui[lang];
 
 const specifications = [
   { label: t.dest, value: project.clientLocation },
@@ -75,14 +45,9 @@ const specifications = [
   { label: t.time, value: project.date },
   { label: t.services, value: project.servicesProvided }
 ].filter((spec) => Boolean(spec.value));
-
-const homeHref = lang === 'fa' ? '/fa' : '/';
-const projectsHref = lang === 'fa' ? '/fa#projects' : '/#projects';
-const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
 ---
 
 <MainLayout title={project.title} description={project.summary}>
-  
   <article class="py-12 sm:py-16 bg-brand-bg">
     <div class="container-editorial">
       
@@ -90,11 +55,11 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
       <nav aria-label="Breadcrumb" class="mb-8 text-[13px] text-brand-muted">
         <ol class="flex flex-wrap items-center gap-2">
           <li>
-            <a href={homeHref} class="hover:text-brand-text transition-colors">{t.home}</a>
+            <a href="/" class="hover:text-brand-text transition-colors">{t.home}</a>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <a href={projectsHref} class="hover:text-brand-text transition-colors">{t.projects}</a>
+            <a href="/#projects" class="hover:text-brand-text transition-colors">{t.projects}</a>
           </li>
           <li aria-hidden="true">/</li>
           <li class="text-brand-secondary truncate max-w-[260px] sm:max-w-none" aria-current="page">
@@ -127,7 +92,7 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
         </div>
       </figure>
 
-      <!-- مشخصات کلیدی محموله -->
+      <!-- مشخصات کلیدی -->
       <section aria-label={t.specTitle} class="mb-14 surface-card p-6 sm:p-8">
         <h2 class="text-[16px] font-bold text-brand-text pb-4 mb-6 border-b border-brand-border">
           {t.specTitle}
@@ -142,19 +107,16 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
         </dl>
       </section>
 
-      <!-- شرح فرآیند و مراحل اجرایی -->
+      <!-- شرح فرآیند و عملیات -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 items-start">
-        
         <section class="lg:col-span-7">
           <h2 class="text-[22px] font-bold text-brand-text mb-5">
             {t.processTitle}
           </h2>
           <div class="space-y-4 text-[15px] sm:text-[16px] text-brand-secondary leading-[1.9] text-justify">
-            {Array.isArray(project.fullDescription) ? (
-              project.fullDescription.map((paragraph: string) => <p>{paragraph}</p>)
-            ) : (
-              <p>{project.fullDescription}</p>
-            )}
+            {project.fullDescription.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
           </div>
 
           {project.documentedOutcome && (
@@ -169,13 +131,14 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
           )}
         </section>
 
+        <!-- مراحل اجرایی -->
         {project.operationalSteps && project.operationalSteps.length > 0 && (
           <aside class="lg:col-span-5 surface-card p-6 sm:p-7">
             <h2 class="text-[17px] font-bold text-brand-text pb-4 mb-5 border-b border-brand-border">
               {t.stepsTitle}
             </h2>
             <ol class="space-y-4">
-              {project.operationalSteps.map((step: string, index: number) => (
+              {project.operationalSteps.map((step, index) => (
                 <li class="flex items-start gap-3.5 text-[14px] text-brand-secondary leading-[1.75]">
                   <span class="w-6 h-6 rounded-[6px] bg-brand-elevated border border-brand-border-strong text-brand-text text-[12px] font-semibold flex items-center justify-center shrink-0 mt-0.5">
                     {index + 1}
@@ -186,7 +149,6 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
             </ol>
           </aside>
         )}
-
       </div>
 
       <!-- تصاویر تکمیلی -->
@@ -196,21 +158,17 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
             {t.galleryTitle}
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {project.gallery.map((item: any) => {
-              const imgUrl = typeof item === 'string' ? item : item.url;
-              const imgAlt = typeof item === 'string' ? project.title : item.alt;
-              return (
-                <figure class="rounded-[12px] overflow-hidden border border-brand-border bg-brand-surface aspect-[16/10]">
-                  <img
-                    src={imgUrl}
-                    alt={imgAlt}
-                    loading="lazy"
-                    decoding="async"
-                    class="w-full h-full object-cover object-center"
-                  />
-                </figure>
-              );
-            })}
+            {project.gallery.map((item) => (
+              <figure class="rounded-[12px] overflow-hidden border border-brand-border bg-brand-surface aspect-[16/10]">
+                <img
+                  src={item.url}
+                  alt={item.alt}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover object-center"
+                />
+              </figure>
+            ))}
           </div>
         </section>
       )}
@@ -222,18 +180,18 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
             {t.otherTitle}
           </h2>
           <a
-            href={projectsHref}
+            href="/#projects"
             class="inline-flex items-center gap-2 text-[13px] font-medium text-brand-secondary hover:text-brand-text transition-colors"
           >
-            <span aria-hidden="true">{t.arrow}</span>
             <span>{t.backLink}</span>
+            <span aria-hidden="true">{t.arrow}</span>
           </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {otherProjects.map((other: any) => (
+          {otherProjects.map((other) => (
             <a
-              href={`${projectBaseUrl}/${other.slug}`}
+              href={`/projects/${other.slug}`}
               class="group block surface-card surface-card-interactive p-5"
             >
               <div class="flex items-center justify-between text-[12px] text-brand-muted mb-2">
@@ -250,5 +208,4 @@ const projectBaseUrl = lang === 'fa' ? '/fa/projects' : '/projects';
 
     </div>
   </article>
-
 </MainLayout>

@@ -1,16 +1,32 @@
 ---
 // src/components/Hero.astro
-import { companyInfo, tradeCorridors } from '../data/projects.js';
+import content from '../data/content.json';
 
-// تعریف دقیق نوع زبان برای تایپ‌اسکریپت جهت رفع خطای 7053
-const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
+const lang: 'fa' | 'tr' =
+  Astro.url.pathname === '/fa' || Astro.url.pathname.startsWith('/fa/')
+    ? 'fa'
+    : 'tr';
 
-const info = companyInfo[lang];
-const corridors = tradeCorridors[lang];
+const info = content.companyInfo[lang];
+const corridors = content.tradeCorridors[lang];
+const contact = content.contact;
+const projectPrefix = lang === 'fa' ? '/fa/projects' : '/projects';
 
 const ui = {
-  fa: { btnConsult: "درخواست مشاوره بازرگانی", btnProjects: "مشاهده پروژه‌ها", corridorsTitle: "مسیرها و کریدورهای عملیاتی", corridorsSub: "مقاصد اصلی صادرات و گمرکات خروجی تحت پوشش شرکت", viewSample: "مشاهده نمونه محموله" },
-  tr: { btnConsult: "Ticari Danışmanlık Alın", btnProjects: "Projeleri İncele", corridorsTitle: "Operasyonel Rotalar ve Koridorlar", corridorsSub: "Şirketimizin kapsadığı ana ihracat noktaları ve gümrükler", viewSample: "Örnek Sevkiyatı Gör" }
+  fa: {
+    btnConsult: "درخواست مشاوره بازرگانی",
+    btnProjects: "مشاهده پروژه‌ها",
+    corridorsTitle: "مسیرها و کریدورهای عملیاتی",
+    corridorsSub: "مقاصد اصلی صادرات و گمرکات خروجی تحت پوشش شرکت",
+    viewSample: "مشاهده نمونه محموله"
+  },
+  tr: {
+    btnConsult: "Ticari Danışmanlık Alın",
+    btnProjects: "Projeleri İncele",
+    corridorsTitle: "Operasyonel Rotalar ve Koridorlar",
+    corridorsSub: "Şirketimizin kapsadığı ana ihracat noktaları ve gümrükler",
+    viewSample: "Örnek Sevkiyatı Gör"
+  }
 };
 const t = ui[lang];
 ---
@@ -34,7 +50,7 @@ const t = ui[lang];
         </p>
 
         <div class="mt-8 flex flex-wrap items-center gap-4">
-          <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" class="btn-primary">
             {t.btnConsult}
           </a>
 
@@ -47,7 +63,7 @@ const t = ui[lang];
         </div>
 
         <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-brand-border">
-          {info.operationalHighlights.map((item: any) => (
+          {info.operationalHighlights.map((item) => (
             <div class={`sm:border-brand-border/60 ${lang === 'fa' ? 'sm:border-r sm:pr-4' : 'sm:border-l sm:pl-4'} first:border-0 first:p-0`}>
               <dt class="text-[12px] text-brand-muted">{item.label}</dt>
               <dd class="text-[15px] font-bold text-brand-text mt-1">{item.value}</dd>
@@ -57,7 +73,7 @@ const t = ui[lang];
         </dl>
       </div>
 
-      <aside aria-label="Operasyonel Rotalar" class="lg:col-span-5 w-full">
+      <aside aria-label={t.corridorsTitle} class="lg:col-span-5 w-full">
         <div class="surface-card p-6 sm:p-7">
           <div class="pb-4 mb-5 border-b border-brand-border">
             <h2 class="text-[16.5px] font-bold text-brand-text">{t.corridorsTitle}</h2>
@@ -65,7 +81,7 @@ const t = ui[lang];
           </div>
 
           <ul class="divide-y divide-brand-border">
-            {corridors.map((corridor: any) => (
+            {corridors.map((corridor) => (
               <li class="py-4 first:pt-0 last:pb-0">
                 <div class="flex items-baseline justify-between gap-2">
                   <h3 class="text-[14.5px] font-semibold text-brand-text">{corridor.destination}</h3>
@@ -73,7 +89,10 @@ const t = ui[lang];
                 </div>
                 <p class="text-[13px] text-brand-secondary mt-1.5 leading-relaxed">{corridor.serviceType}</p>
                 {corridor.relatedProjectSlug && (
-                  <a href={`/projects/${corridor.relatedProjectSlug}`} class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 transition-colors">
+                  <a
+                    href={`${projectPrefix}/${corridor.relatedProjectSlug}`}
+                    class="inline-flex items-center gap-1.5 text-[12px] font-medium text-brand-secondary hover:text-brand-text underline underline-offset-4 decoration-brand-border hover:decoration-brand-secondary mt-2 transition-colors"
+                  >
                     <span>{t.viewSample}</span>
                     <span aria-hidden="true">{lang === 'fa' ? '←' : '→'}</span>
                   </a>

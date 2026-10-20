@@ -4,14 +4,18 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import WhatsAppCTA from '../components/WhatsAppCTA.astro';
 import Footer from '../components/Footer.astro';
-import { companyInfo } from '../data/projects.js';
+import content from '../data/content.json';
 
-// اگر آدرس با /fa شروع شود، زبان fa است، وگرنه tr (پیش‌فرض) است
-const lang = Astro.url.pathname.startsWith('/fa') ? 'fa' : 'tr';
+const lang: 'fa' | 'tr' =
+  Astro.url.pathname === '/fa' || Astro.url.pathname.startsWith('/fa/')
+    ? 'fa'
+    : 'tr';
+
 const dir = lang === 'fa' ? 'rtl' : 'ltr';
-const info = companyInfo[lang] || companyInfo.tr;
+const info = content.companyInfo[lang] || content.companyInfo.tr;
 
 const { title = info.name, description = info.shortIntro, hideBottomCTA = false } = Astro.props;
+const pageTitle = title === info.name ? `${info.name} | ${info.legalTitle}` : `${title} | ${info.name}`;
 ---
 
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ const { title = info.name, description = info.shortIntro, hideBottomCTA = false 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
 
     <!-- لود همزمان فونت‌های Montserrat (ترکی) و Vazirmatn (فارسی) -->
@@ -28,7 +32,6 @@ const { title = info.name, description = info.shortIntro, hideBottomCTA = false 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
 
-  <!-- اعمال کلاس فونت بر اساس زبان -->
   <body class={`min-h-screen flex flex-col bg-brand-bg text-brand-text selection:bg-brand-gold selection:text-brand-bg ${lang === 'fa' ? 'font-vazir' : 'font-montserrat'}`}>
     <Navbar />
     <main id="main-content" class="flex-grow">

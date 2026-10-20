@@ -1,13 +1,25 @@
 ---
 // src/components/Services.astro
-import { services } from '../data/projects.js';
+import content from '../data/content.json';
 
-const lang = (Astro.currentLocale || 'tr') as 'fa' | 'tr';
-const currentServices = services[lang];
+const lang: 'fa' | 'tr' =
+  Astro.url.pathname === '/fa' || Astro.url.pathname.startsWith('/fa/')
+    ? 'fa'
+    : 'tr';
+
+const currentServices = content.services[lang];
 
 const ui = {
-  fa: { title1: "خدمات بازرگانی", title2: "حوزه‌های تخصصی و اجرایی شرکت", desc: "فرآیند صادرات نیازمند هماهنگی دقیق میان تولیدکننده، گمرک و ناوگان حمل‌ونقل است. خدمات ما زنجیره عملیات تجاری را به‌صورت یکپارچه پوشش می‌دهد." },
-  tr: { title1: "Ticari Hizmetler", title2: "Uzmanlık Alanlarımız ve Faaliyetlerimiz", desc: "İhracat süreci, üretici, gümrük ve nakliye filosu arasında hassas bir koordinasyon gerektirir. Hizmetlerimiz ticari operasyon zincirini entegre bir şekilde kapsar." }
+  fa: {
+    title1: "خدمات بازرگانی",
+    title2: "حوزه‌های تخصصی و اجرایی شرکت",
+    desc: "فرآیند صادرات نیازمند هماهنگی دقیق میان تولیدکننده، گمرک و ناوگان حمل‌ونقل است. خدمات ما زنجیره عملیات تجاری را به‌صورت یکپارچه پوشش می‌دهد."
+  },
+  tr: {
+    title1: "Ticari Hizmetler",
+    title2: "Uzmanlık Alanlarımız ve Faaliyetlerimiz",
+    desc: "İhracat süreci, üretici, gümrük ve nakliye filosu arasında hassas bir koordinasyon gerektirir. Hizmetlerimiz ticari operasyon zincirini entegre bir şekilde kapsar."
+  }
 };
 const t = ui[lang];
 ---
@@ -22,10 +34,12 @@ const t = ui[lang];
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 border-t border-brand-border rounded-[12px] overflow-hidden bg-brand-bg">
-      {currentServices.map((service: any, index: number) => (
+      {currentServices.map((service, index) => (
         <div class="p-6 sm:p-8 border-b border-brand-border flex flex-col justify-between transition-colors hover:bg-brand-surface/40">
           <div>
-            <span class="text-[12px] font-medium text-brand-muted block mb-2.5">۰{index + 1}</span>
+            <span class="text-[12px] font-medium text-brand-muted block mb-2.5">
+              {lang === 'fa' ? `۰${index + 1}` : `0${index + 1}`}
+            </span>
             <h3 class="text-[18px] font-bold text-brand-text">{service.title}</h3>
             <p class="text-[14px] sm:text-[15px] text-brand-secondary mt-3 leading-[1.8]">{service.description}</p>
           </div>

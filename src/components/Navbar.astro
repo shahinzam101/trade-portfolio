@@ -1,15 +1,15 @@
 ---
 // src/components/Navbar.astro
-import { companyInfo } from '../data/projects.js';
+import content from '../data/content.json';
 import LanguagePicker from './LanguagePicker.astro';
 
 const lang: 'fa' | 'tr' =
-  Astro.url.pathname === '/fa' ||
-  Astro.url.pathname.startsWith('/fa/')
+  Astro.url.pathname === '/fa' || Astro.url.pathname.startsWith('/fa/')
     ? 'fa'
     : 'tr';
 
-const info = companyInfo[lang];
+const info = content.companyInfo[lang];
+const contact = content.contact;
 
 const ui = {
   fa: {
@@ -45,7 +45,7 @@ const t = ui[lang];
     
     <a href={lang === 'fa' ? '/fa' : '/'} class="flex items-center gap-3 group focus:outline-none">
       <div class="w-[34px] h-[34px] rounded-[8px] bg-brand-surface border border-brand-border-strong flex items-center justify-center text-brand-text font-bold text-[15px] transition-colors group-hover:border-brand-secondary">
-        A
+        {lang === 'fa' ? 'آ' : 'A'}
       </div>
       <div class="flex flex-col">
         <span class="text-[15.5px] font-bold text-brand-text leading-tight">{info.name}</span>
@@ -53,18 +53,18 @@ const t = ui[lang];
       </div>
     </a>
 
-    <nav aria-label="ناوبری اصلی" class="hidden md:flex items-center gap-8">
-      {t.links.map((item: any) => (
+    <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-8">
+      {t.links.map((item) => (
         <a href={item.href} class="nav-link">{item.label}</a>
       ))}
     </nav>
 
     <div class="flex items-center gap-2 sm:gap-3">
       <LanguagePicker />
-      <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex btn-primary-sm">
+      <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex btn-primary-sm">
         {t.btnConsult}
       </a>
-      <button id="mobile-menu-toggle" type="button" aria-expanded="false" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[8px] bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border-strong transition-colors">
+      <button id="mobile-menu-toggle" type="button" aria-expanded="false" aria-label="Menu" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-[8px] bg-brand-surface border border-brand-border text-brand-text hover:border-brand-border-strong transition-colors">
         <svg id="icon-menu-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
         <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
@@ -73,13 +73,13 @@ const t = ui[lang];
 
   <nav id="mobile-navigation" class="hidden md:hidden border-t border-brand-border bg-brand-surface shadow-xl">
     <div class="container-editorial py-4 flex flex-col gap-1">
-      {t.links.map((item: any) => (
+      {t.links.map((item) => (
         <a href={item.href} class="mobile-nav-link text-[14.5px] font-medium text-brand-secondary hover:text-brand-text py-2.5 border-b border-brand-border/60 last:border-b-0 transition-colors">
           {item.label}
         </a>
       ))}
       <div class="pt-3 mt-1">
-        <a href={companyInfo.whatsapp} target="_blank" rel="noopener noreferrer" class="w-full btn-primary">
+        <a href={contact.whatsapp} target="_blank" rel="noopener noreferrer" class="w-full btn-primary">
           {t.btnConsultWa}
         </a>
       </div>
